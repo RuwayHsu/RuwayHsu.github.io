@@ -50,30 +50,39 @@
             gap: 20px;
             max-width: 1200px;
             margin: 0 auto;
-            flex-wrap: wrap; /* 允許在小螢幕上換行 */
+            align-items: stretch; /* 確保兩欄高度一致 */
         }
         .left-column {
-            flex: 0 0 40%;
-            max-width: 40%;
+            flex: 0 0 50%; /* 佔據左半部分 */
+            max-width: 50%;
+            position: relative; /* 為圖片定位 */
+            overflow: hidden; /* 隱藏超出部分 */
+        }
+        .left-column img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* 圖片補滿容器 */
+            border-radius: 10px; /* 圖片圓角 */
         }
         .right-column {
             flex: 1;
             text-align: left;
-        }
-        .left-column img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 10px; /* 圖片圓角 */
+            padding: 20px;
         }
         /* 響應式設計 */
         @media (max-width: 768px) {
             .home-content {
                 flex-direction: column;
-                align-items: center;
             }
             .left-column, .right-column {
                 max-width: 100%;
                 flex: 1 1 100%;
+            }
+            .left-column {
+                height: 300px; /* 手機上設置固定高度 */
             }
         }
         /* 社群按鈕樣式 */
