@@ -75,14 +75,19 @@
         /* 響應式設計 */
         @media (max-width: 768px) {
             .home-content {
-                flex-direction: column;
-            }
-            .left-column, .right-column {
-                max-width: 100%;
-                flex: 1 1 100%;
+                flex-direction: column; /* 窄螢幕時垂直排列 */
             }
             .left-column {
+                max-width: 100%;
+                flex: 1 1 100%;
                 height: 300px; /* 手機上設置固定高度 */
+                order: 1; /* 圖片在上 */
+            }
+            .right-column {
+                max-width: 100%;
+                flex: 1 1 100%;
+                padding: 10px 20px; /* 調整內距 */
+                order: 2; /* 文字在下 */
             }
         }
         /* 社群按鈕樣式 */
@@ -206,7 +211,7 @@
             </ul>
             <h3>可使用指令</h3>
             <ul>
-                <li><strong>!dc</strong> - 機器人會輸出Zen Studio的Discord群組連結</li>
+                <li><strong>!dc</strong> - 機器奇怪的機器人會輸出Zen Studio的Discord群組連結</li>
                 <li><strong>!yt</strong> - 機器人會輸出我的YouTube頻道連結</li>
                 <li><strong>!osu</strong> - 機器人會輸出我的osu!個人檔案連結</li>
             </ul>
@@ -240,7 +245,7 @@
     </div>
 
     <div class="footer">
-        <p>© 2023 RuwayHsu滷滷熊熊 | 跪求抖內支持</p>
+        <p>&copy; 2025 RuwayHsu滷滷熊熊 | 跪求抖內支持</p>
     </div>
-</body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9376d140efe46787',t:'MTc0NTg0NjAxMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
