@@ -136,17 +136,32 @@
                 flex: 0 0 calc(50% - 20px);
             }
         }
-        .partners-content {
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background: #1a1a2e;
+            margin-top: 20px;
+        }
+        .partner-header {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+        .partner-header h2 {
+            margin: 0;
+            font-size: 2em;
+            color: #ff99cc;
+        }
+
+        .partner-content {
             display: flex;
             gap: 20px;
-            margin-top: 15px;
-            margin-bottom: 15px;
-            align-items: center;
+            align-items: flex-start;
         }
 
         .partner-left {
-            flex: 0 0 30%;
-            max-width: 30%;
+            flex: 0 0 40%;
+            max-width: 40%;
         }
 
         .partner-left img {
@@ -156,76 +171,51 @@
         }
 
         .partner-right {
-            flex: 1 1 70%;
+            flex: 1;
             text-align: left;
-            padding: 0 10px;
         }
 
         .partner-buttons {
             display: flex;
-            flex-wrap: wrap;
             justify-content: center;
-            gap: 15px;
-            width: 100%;
+            gap: 10px;
+            margin-top: 20px;
         }
 
         .partner-buttons .button {
-            color: #ff69b4;
-            flex: 0 0 calc(25% - 15px);
-            min-width: 120px;
-            padding: 10px 15px;
-            border: 2px solid #ff69b4;
+            background: #ff69b4;
+            color: #ffffff;
+            padding: 10px 20px;
             border-radius: 5px;
             text-decoration: none;
             font-weight: bold;
             transition: background 0.3s, color 0.3s;
-            box-sizing: border-box;
-            margin-bottom: 10px;
         }
 
         .partner-buttons .button:hover {
-            background: #ff69b4;
-            color: #ffffff;
+            background: #ffffff;
+            color: #ff69b4;
         }
 
-        /* 協助夥伴響應式設計優化 */
         @media (max-width: 960px) {
-            .partners-content {
+            .partner-header {
+                text-align: center;
+            }
+
+            .partner-content {
                 flex-direction: column;
+                align-items: center;
                 text-align: center;
             }
 
             .partner-left {
-                max-width: 80%;
-                margin: 0 auto;
+                max-width: 100%;
             }
 
             .partner-right {
                 max-width: 100%;
-                width: 100%;
-                flex: 1 1 auto;
                 padding: 15px 0;
-                text-align: left;
             }
-        }
-
-        @media (max-width: 768px) {
-            .partner-buttons .button {
-                flex: 0 0 calc(50% - 15px);
-            }
-        }
-
-        @media (max-width: 480px) {
-            .partner-buttons .button {
-                flex: 0 0 100%;
-            }
-        }
-        
-        .footer {
-            text-align: center;
-            padding: 20px;
-            background: #1a1a2e;
-            margin-top: 20px;
         }
     </style>
 </head>
@@ -354,52 +344,21 @@
 
         <!-- 協助夥伴 -->
         <div id="partners" class="section">
-            <h2>協助夥伴</h2>
-            <div class="partners-content">
+            <div class="partner-header">
                 <h2>Zenen</h2>
+            </div>
+            <div class="partner-content">
                 <div class="partner-left">
                     <img src="https://a.imglink.io/RbWx4.jpg" alt="Zenen">
                 </div>
                 <div class="partner-right">
                     <h3>介紹</h3>
-                    <p>Zenen是我的第一位合作人，也是第一個我加入工作室的老闆，雖然身為老闆，但他並沒有在其他老闆上常看到的傲慢態度，反而會聽聽底下其他員工們的想法以及專業建議，並且統整出一個最佳方案</p>
-                    <h3>專長與強項</h3>
-                    <ul>
-                        <li>管理</li>
-                        <li>意見統整</li>
-                        <li>意見發想</li>
-                        <li>企劃發想者</li>
-                        <li>找尋合作夥伴</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="partner-buttons">
-                <a href="https://www.youtube.com/@zenen.vtuber/shorts" class="button">YouTube</a>
-                <a href="https://www.twitch.tv/zenenvtuber" class="button">Twitch</a>
-                <a href="https://discord.com/invite/dZpCb2PZT9" class="button">Discord</a>
-                <a href="https://zenen.my.canva.site/zenen" class="button">More Info</a>
-            </div>
-            <div class="partners-content">
-                <h2>Zenen</h2>
-                <div class="partner-left">
-                    <img src="https://a.imglink.io/RbWx4.jpg" alt="Zenen">
-                </div>
-                <div class="partner-right">
-                    <h3>介紹</h3>
-                    <p>Zenen是我的第一位合作人，也是第一個我加入工作室的老闆，雖然身為老闆，但他並沒有在其他老闆上常看到的傲慢態度，反而會聽聽底下其他員工們的想法以及專業建議，並且統整出一個最佳方案</p>
+                    <p>Zenen是我的第一位合作人，也是第一個我加入工作室的老闆，雖然身為老闆，但他並沒有在其他老闆上常看到的傲慢態度，反而會聽聽底下其他員工們的想法以及專業建議，並且統整出一個最佳方案。</p>
                     <h3>人物設定</h3>
                     <p>『現在是奧多前28年（西元2022年），終於...能和大家聯繫了我來自奧多3年（西元2053年）。透過蓋亞母親的協助穿越時間線來到這裡，目的是為了能修正未來，讓我們人類族能重新與高我聯繫，並從「命迴題」中揚升。』</p>
-                    <p>『在未來，我們時空裡的人類族活在幻象中，幻象是掉入深井無法求援的孤寂，也是蜷縮斷垣殘壁毫無遮蔽的寒慄，但那不是被加諸的危害，而是自身創造的實像。』</p>        
+                                        <p>『在未來，我們時空裡的人類族活在幻象中，幻象是掉入深井無法求援的孤寂，也是蜷縮斷垣殘壁毫無遮蔽的寒慄，但那不是被加諸的危害，而是自身創造的實像。』</p>        
                     <p>『為了得到永續能源與永生，地球戰爭持續數年，使得環境逐漸與火星相似，甚至已將魔爪伸向銀河系，但他們並不知道擁有越多的同時也種下無數仇恨的種子，最終得到提升的只剩戰爭檔次。』</p>                        
                     <p>『被忘卻的「命迴題」最終成了膚淺的儀式…。』</p>                        
-                    <h3>專長與強項</h3>
-                    <ul>
-                        <li>管理</li>
-                        <li>意見統整</li>
-                        <li>意見發想</li>
-                        <li>企劃發想者</li>
-                        <li>找尋合作夥伴</li>
-                    </ul>
                 </div>
             </div>
             <div class="partner-buttons">
