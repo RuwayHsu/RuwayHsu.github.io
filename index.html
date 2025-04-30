@@ -217,6 +217,22 @@
                 padding: 15px 0;
             }
         }
+
+        @media (max-width: 768px) {
+            .partner-buttons {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+
+            .partner-buttons .button {
+                flex: 0 0 calc(50% - 10px); /* 每行最多2個，間距10px */
+                text-align: center;
+            }
+
+            .partner-buttons .button:nth-child(odd):only-child {
+                flex: 0 0 100%; /* 如果只有一個按鈕，左右填滿 */
+            }
+        }
         
         .donators-grid {
             display: flex;
@@ -382,7 +398,7 @@
         <div id="partners" class="section">
             <h2>協作夥伴與贊助者</h2>
             <div class="partner-header">
-                <h2>Zenen</h2>
+                <h2>Zenen 老闆&資助人</h2>
             </div>
             <div class="partner-content">
                 <div class="partner-left">
@@ -404,7 +420,31 @@
                 <a href="https://discord.com/invite/dZpCb2PZT9" class="button">Discord</a>
                 <a href="https://zenen.my.canva.site/zenen" class="button">More Info</a>
             </div>
+            <br>
+            <div class="partner-header">
+                <h2>Muika 繪師&建模師&設計師</h2>
+            </div>
+            <div class="partner-content">
+                <div class="partner-left">
+                    <img src="https://a.imglink.io/Rs6Zg.jpg" alt="Muika">
+                </div>
+                <div class="partner-right">
+                    <h3>介紹</h3>
+                    <p>Muika目前在v圈是一條龍繪師以及設計師，並且人超好溝通!!通靈能力也很厲害!!，所以如果想要找他委託不需要感到害怕，她很好溝通真的!!!，並且價格沒有高貴台灣繪師價格反而是平民價，而且還比較優質(阿熊認證)，大推大推!!</p>
+                    <h3>人物設定</h3>
+                    <p>來自十一次元的懶惰拖稿睡魔, 承接各式委託。</p>
+                    <p>愛睡覺和喜歡三角形</p>
+                </div>
+            </div>
+            <div class="partner-buttons">
+                <a href="https://www.twitch.tv/kawap_0" class="button">Twitch</a>
+                <a href="https://mui0706.wixsite.com/home" class="button">About Me</a>
+                <a href="https://lit.link/en/KawaP" class="button">lit.link</a>
+            </div>
+
         </div>
+
+
 
         <!-- 抖內人士 -->
         <div id="donators" class="section">
