@@ -217,6 +217,41 @@
                 padding: 15px 0;
             }
         }
+        
+        .donators-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .donator {
+            flex: 0 0 calc(25% - 20px); /* 每行最多4個，間距20px */
+            box-sizing: border-box;
+            text-align: center;
+            background: #1a1a2e;
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        .donator img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin: 10px 0;
+        }
+
+        @media (max-width: 960px) {
+            .donator {
+                flex: 0 0 calc(50% - 20px); /* 每行最多2個 */
+            }
+        }
+
+        @media (max-width: 600px) {
+            .donator {
+                flex: 0 0 100%; /* 每行1個 */
+            }
+        }
     </style>
 </head>
 <body>
@@ -367,6 +402,55 @@
                 <a href="https://www.twitch.tv/zenenvtuber" class="button">Twitch</a>
                 <a href="https://discord.com/invite/dZpCb2PZT9" class="button">Discord</a>
                 <a href="https://zenen.my.canva.site/zenen" class="button">More Info</a>
+            </div>
+        </div>
+
+        <!-- 抖內人士 -->
+        <div id="donators" class="section">
+            <h2>抖內人士</h2>
+            <div class="donators-grid">
+                <div class="donator">
+                    <h3>祤叶</h3>
+                    <img src="https://static-cdn.jtvnw.net/jtv_user_pictures/b8ea1de5-1036-4e43-b914-c04406a60f88-profile_image-70x70.png" alt="祤叶">
+                    <p>訂閱贈訂數: 5</p>
+                    <p>小奇點數: 900</p>
+                    <p>錢錢(NTD): 0</p>
+                </div>
+                <div class="donator">
+                    <h3>吖玄玄</h3>
+                    <img src="https://static-cdn.jtvnw.net/jtv_user_pictures/f7d08096-16f6-4dad-9c3b-c9d3e3793094-profile_image-70x70.png" alt="吖玄玄">
+                    <p>訂閱贈訂數: 1</p>
+                    <p>小奇點數: 470</p>
+                    <p>錢錢(NTD): 0</p>
+                </div>
+                <div class="donator">
+                    <h3>qwezxc056</h3>
+                    <img src="https://static-cdn.jtvnw.net/user-default-pictures-uv/ebb84563-db81-4b9c-8940-64ed33ccfc7b-profile_image-70x70.png" alt="qwezxc056">
+                    <p>訂閱贈訂數: 11</p>
+                    <p>小奇點數: 0</p>
+                    <p>錢錢(NTD): 0</p>
+                </div>
+                <div class="donator">
+                    <h3>抹茶星巴克</h3>
+                    <img src="https://static-cdn.jtvnw.net/jtv_user_pictures/32262df9-124d-445c-b353-1aec69fb567c-profile_image-70x70.png" alt="抹茶星巴克">
+                    <p>訂閱贈訂數: 3</p>
+                    <p>小奇點數: 10</p>
+                    <p>錢錢(NTD): 0</p>
+                </div>
+                <div class="donator">
+                    <h3>VALORANT</h3>
+                    <img src="https://static-cdn.jtvnw.net/jtv_user_pictures/34c5c8da-19b6-47b2-85ba-cc7ae87f1413-profile_image-70x70.png" alt="VALORANT">
+                    <p>訂閱贈訂數: 3</p>
+                    <p>小奇點數: 0</p>
+                    <p>錢錢(NTD): 0</p>
+                </div>
+                <div class="donator">
+                    <h3>passing_nousagi_lolicon</h3>
+                    <img src="https://static-cdn.jtvnw.net/user-default-pictures-uv/ead5c8b2-a4c9-4724-b1dd-9f00b46cbd3d-profile_image-70x70.png" alt="passing_nousagi_lolicon">
+                    <p>訂閱贈訂數: 0</p>
+                    <p>小奇點數: 10</p>
+                    <p>錢錢(NTD): 0</p>
+                </div>
             </div>
         </div>
 
