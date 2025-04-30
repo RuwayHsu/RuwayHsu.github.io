@@ -36,6 +36,13 @@
             padding: 20px;
             background: #1a1a2e;
             border-radius: 10px;
+            opacity: 0; /* 初始隱藏 */
+            transform: translateY(50px); /* 初始向下偏移 */
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out; /* 過渡效果 */
+        }
+        .section.visible {
+            opacity: 1; /* 顯示 */
+            transform: translateY(0); /* 回到原位 */
         }
         h1, h2, h3 {
             color: #ff99cc;
@@ -44,12 +51,18 @@
             list-style-type: disc;
             padding-left: 20px;
         }
-        /* 首頁獨立樣式 */
         #home-section {
             margin: 20px 0;
             padding: 20px;
             background: #1a1a2e;
             border-radius: 10px;
+            opacity: 0; /* 初始隱藏 */
+            transform: translateY(50px); /* 初始向下偏移 */
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out; /* 過渡效果 */
+        }
+        #home-section.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
         .home-content {
             display: flex;
@@ -78,21 +91,20 @@
             text-align: left;
             padding: 20px;
         }
-        /* 響應式設計 */
         @media (max-width: 960px) {
             .home-content {
-                flex-direction: column; /* 垂直排列 */
+                flex-direction: column;
             }
             .left-column {
                 max-width: 100%;
                 flex: 1 1 auto;
-                height: 600px; /* 固定高度 */
-                position: relative; /* 保持相對定位 */
-                margin-bottom: 20px; /* 添加下方間距 */
-                order: 1; /* 圖片在上 */
+                height: 600px;
+                position: relative;
+                margin-bottom: 20px;
+                order: 1;
             }
             .left-column img {
-                position: static; /* 改為靜態定位而非絕對定位 */
+                position: static;
                 display: block;
                 width: 100%;
                 height: 100%;
@@ -102,11 +114,10 @@
             .right-column {
                 max-width: 100%;
                 flex: 1 1 auto;
-                padding: 10px 0; /* 調整內邊距 */
-                order: 2; /* 文字在下 */
+                padding: 10px 0;
+                order: 2;
             }
         }
-        /* 社群按鈕樣式 */
         .social-buttons {
             display: flex;
             flex-wrap: wrap;
@@ -146,42 +157,35 @@
             text-align: left;
             margin-bottom: 20px;
         }
-
         .partner-header h2 {
             margin: 0;
             font-size: 2em;
             color: #ff99cc;
         }
-
         .partner-content {
             display: flex;
             gap: 20px;
             align-items: flex-start;
         }
-
         .partner-left {
             flex: 0 0 40%;
             max-width: 40%;
         }
-
         .partner-left img {
             width: 100%;
             height: auto;
             border-radius: 10px;
         }
-
         .partner-right {
             flex: 1;
             text-align: left;
         }
-
         .partner-buttons {
             display: flex;
             justify-content: center;
             gap: 10px;
             margin-top: 20px;
         }
-
         .partner-buttons .button {
             border: 2px solid #ff69b4;
             color: #ff69b4;
@@ -191,81 +195,68 @@
             font-weight: bold;
             transition: background 0.3s, color 0.3s;
         }
-
         .partner-buttons .button:hover {
             background: #ff69b4;
             color: #ffffff;
         }
-
         @media (max-width: 960px) {
             .partner-header {
                 text-align: center;
             }
-
             .partner-content {
                 flex-direction: column;
                 align-items: center;
                 text-align: center;
             }
-
             .partner-left {
                 max-width: 100%;
             }
-
             .partner-right {
                 max-width: 100%;
                 padding: 15px 0;
             }
         }
-
         @media (max-width: 768px) {
             .partner-buttons {
                 flex-wrap: wrap;
                 gap: 10px;
             }
-
             .partner-buttons .button {
-                flex: 0 0 calc(50% - 10px); /* 每行最多2個，間距10px */
+                flex: 0 0 calc(50% - 10px);
                 text-align: center;
             }
-
             .partner-buttons .button:nth-child(odd):only-child {
-                flex: 0 0 100%; /* 如果只有一個按鈕，左右填滿 */
+                flex: 0 0 100%;
             }
         }
-        
         .donators-grid {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             gap: 20px;
         }
-
         .donator {
-            flex: 0 0 calc(25% - 20px); /* 每行最多4個，間距20px */
+            flex: 0 0 calc(25% - 20px);
             box-sizing: border-box;
             text-align: center;
             background: #1a1a2e;
             padding: 10px;
             border-radius: 10px;
         }
-
         .donator img {
             width: 100px;
             height: 100px;
             border-radius: 50%;
             margin: 10px 0;
         }
-
         @media (max-width: 960px) {
             .donator {
-                flex: 0 0 calc(50% - 20px); /* 每行最多2個 */
+                flex: 0 0 calc(50% - 20px);
             }
         }
-
         @media (max-width: 600px) {
             .donator {
-                flex: 0 0 100%; /* 每行1個 */
+                flex: 0 0 100%;
             }
         }
     </style>
@@ -282,7 +273,6 @@
     </div>
 
     <div class="container">
-        <!-- 首頁獨立區塊 -->
         <section id="home-section">
             <h1>RuwayHsu滷滷熊熊</h1>
             <div class="home-content">
@@ -320,7 +310,6 @@
             </div>
         </section>
 
-        <!-- 委託資訊 -->
         <div id="commission" class="section">
             <h2>委託資訊</h2>
             <h3>Discord Bot客製化服務</h3>
@@ -347,7 +336,6 @@
             </ul>
         </div>
 
-        <!-- Twitch指令說明 -->
         <div id="twitch" class="section">
             <h2>Twitch指令說明</h2>
             <h3>指令使用說明</h3>
@@ -373,7 +361,6 @@
             <p>以下為抖內時會贈送的貢丸以及加成比例 (請參考附件圖片)</p>
         </div>
 
-        <!-- 所學技能 -->
         <div id="skills" class="section">
             <h2>所學技能</h2>
             <p>這裡是我目前所學的技能，未來會不定期更新。</p>
@@ -394,7 +381,6 @@
             <p>老實講用來轉檔比較多w</p>
         </div>
 
-        <!-- 協助夥伴 -->
         <div id="partners" class="section">
             <h2>協作夥伴與贊助者</h2>
             <div class="partner-header">
@@ -441,12 +427,8 @@
                 <a href="https://mui0706.wixsite.com/home" class="button">About Me</a>
                 <a href="https://lit.link/en/KawaP" class="button">lit.link</a>
             </div>
-
         </div>
 
-
-
-        <!-- 抖內人士 -->
         <div id="donators" class="section">
             <h2>抖內人士</h2>
             <div class="donators-grid">
@@ -495,7 +477,6 @@
             </div>
         </div>
 
-        <!-- 更多連結 -->
         <div id="links" class="section">
             <h2>更多連結</h2>
             <p>這裡是一些社交媒體的按鈕，點擊可以訪問我的社交媒體頁面。</p>
@@ -515,5 +496,26 @@
     <div class="footer">
         <p>&copy; 2025 RuwayHsu滷滷熊熊 | 跪求抖內支持</p>
     </div>
+
+    <script>
+        // 使用 Intersection Observer 檢測 section 是否進入視窗
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('.section, #home-section');
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target); // 只觸發一次
+                    }
+                });
+            }, {
+                threshold: 0.1 // 當 10% 的 section 可見時觸發
+            });
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        });
+    </script>
 </body>
 </html>
