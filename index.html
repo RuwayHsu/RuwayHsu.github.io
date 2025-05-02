@@ -11,6 +11,7 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
+            transition: all 0.5s ease;
         }
         .container {
             max-width: 1200px;
@@ -21,6 +22,9 @@
             background: #3a2a4d;
             padding: 10px 0;
             text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
         .nav a {
             color: #ff99cc;
@@ -36,13 +40,13 @@
             padding: 20px;
             background: #1a1a2e;
             border-radius: 10px;
-            opacity: 0; /* 初始隱藏 */
-            transform: translateY(50px); /* 初始向下偏移 */
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out; /* 過渡效果 */
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
         }
         .section.visible {
-            opacity: 1; /* 顯示 */
-            transform: translateY(0); /* 回到原位 */
+            opacity: 1;
+            transform: translateY(0);
         }
         h1, h2, h3 {
             color: #ff99cc;
@@ -56,9 +60,9 @@
             padding: 20px;
             background: #1a1a2e;
             border-radius: 10px;
-            opacity: 0; /* 初始隱藏 */
-            transform: translateY(50px); /* 初始向下偏移 */
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out; /* 過渡效果 */
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
         }
         #home-section.visible {
             opacity: 1;
@@ -153,6 +157,7 @@
             padding: 10px;
             background: #1a1a2e;
             margin-top: 10px;
+            transition: opacity 0.5s ease;
         }
         .partner-header {
             text-align: left;
@@ -260,6 +265,35 @@
                 flex: 0 0 100%;
             }
         }
+        .second_page {
+            display: none;
+            position: absolute;
+            top: 60px;
+            left: 0;
+            width: 100%;
+            height: calc(100% - 60px);
+            background: linear-gradient(to bottom, #2a1a3d, #000000);
+        }
+        .second_page.active {
+            display: block;
+        }
+        .main-content {
+            transition: opacity 0.5s ease;
+        }
+        .main-content.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        /* 彩蛋連結樣式 */
+        .secret-link {
+            color: #ffb8db; /* 與頁腳其他文字相同顏色 */
+            text-decoration: none;
+            font-size: inherit; /* 預設與周圍文字相同大小 */
+            transition: font-size 0.3s ease; /* 平滑過渡效果 */
+        }
+        .secret-link:hover {
+            font-size: 1.2em; /* 滑鼠懸停時放大到1.2倍 */
+        }
     </style>
 </head>
 <body>
@@ -274,288 +308,304 @@
         <a href="#links">更多連結</a>
     </div>
 
-    <!-- 首頁 -->
-    <div class="container">
-        <section id="home-section">
-            <h1>RuwayHsu滷滷熊熊</h1>
-            <div class="home-content">
-                <div class="left-column">
-                    <img src="https://a.imglink.io/RpAwo.png" alt="RuwayHsu">
+    <div class="main-content">
+        <div class="container">
+            <section id="home-section">
+                <h1>RuwayHsu滷滷熊熊</h1>
+                <div class="home-content">
+                    <div class="left-column">
+                        <img src="https://a.imglink.io/RpAwo.png" alt="RuwayHsu">
+                    </div>
+                    <div class="right-column">
+                        <h2>RuwayHsu滷滷熊熊루루셩셩</h2>
+                        <h3>人物介紹</h3>
+                        <ul>
+                            <li>滷滷熊熊、熊熊、滷滷、RuwayHsu、루루셩셩</li>
+                            <li><strong>人設:</strong> 可實體化的幽靈</li>
+                            <li><strong>生日:</strong> 西元2005年1月20日</li>
+                            <li><strong>語言能力:</strong> 中文(臺灣)</li>
+                            <li><strong>目前崗位:</strong> 技術支援、效率組、AI技術負責(也是此AI創作者)、外交人</li>
+                            <li><strong>興趣:</strong> 打遊戲、踩地雷(?、閱讀懸疑小說、思考藝術作品</li>
+                            <li><strong>人格特質:</strong> INTJ-T</li>
+                            <li><strong>經濟狀況:</strong> 跪求抖內</li>
+                        </ul>
+                        <h3>遊戲</h3>
+                        <ul>
+                            <li><strong>CS2:</strong> 最近剛開始接觸</li>
+                            <li><strong>osu!:</strong> Lazer版本std滑鼠玩家，全球排名46k</li>
+                            <li><strong>Minecraft:</strong> 玩十年了但記憶都在1.12那一個版本</li>
+                        </ul>
+                        <h3>喜歡吃的食物</h3>
+                        <ul>
+                            <li>薯條、義大利麵、咖哩飯、熱狗堡、漢堡、炸雞、台灣特色小吃(no 海鮮)、蔬菜</li>
+                        </ul>
+                        <h3>討厭吃的食物</h3>
+                        <ul>
+                            <li>海鮮</li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="right-column">
-                    <h2>RuwayHsu滷滷熊熊루루셩셩</h2>
-                    <h3>人物介紹</h3>
-                    <ul>
-                        <li>滷滷熊熊、熊熊、滷滷、RuwayHsu、루루셩셩</li>
-                        <li><strong>人設:</strong> 可實體化的幽靈</li>
-                        <li><strong>生日:</strong> 西元2005年1月20日</li>
-                        <li><strong>語言能力:</strong> 中文(臺灣)</li>
-                        <li><strong>目前崗位:</strong> 技術支援、效率組、AI技術負責(也是此AI創作者)、外交人</li>
-                        <li><strong>興趣:</strong> 打遊戲、踩地雷(?、閱讀懸疑小說、思考藝術作品</li>
-                        <li><strong>人格特質:</strong> INTJ-T</li>
-                        <li><strong>經濟狀況:</strong> 跪求抖內</li>
-                    </ul>
-                    <h3>遊戲</h3>
-                    <ul>
-                        <li><strong>CS2:</strong> 最近剛開始接觸</li>
-                        <li><strong>osu!:</strong> Lazer版本std滑鼠玩家，全球排名46k</li>
-                        <li><strong>Minecraft:</strong> 玩十年了但記憶都在1.12那一個版本</li>
-                    </ul>
-                    <h3>喜歡吃的食物</h3>
-                    <ul>
-                        <li>薯條、義大利麵、咖哩飯、熱狗堡、漢堡、炸雞、台灣特色小吃(no 海鮮)、蔬菜</li>
-                    </ul>
-                    <h3>討厭吃的食物</h3>
-                    <ul>
-                        <li>海鮮</li>
-                    </ul>
+            </section>
+
+            <div id="commission" class="section">
+                <h2>委託資訊</h2>
+                <h3>Discord Bot客製化服務</h3>
+                <p><strong>注意事項 Precautions</strong></p>
+                <ul>
+                    <li>使用Python語言</li>
+                    <li>會提供虛擬環境以及執行批次檔</li>
+                    <li>第一次執行時有可能會有些許意外所以我需要一旁觀察</li>
+                    <li>我會在你的群觀察程式是否有bug(委託能動就好方案則不會)</li>
+                    <li>但如果是因為自己修改原始碼導致的bug，不處理，想嘗試請自行備份</li>
+                    <li>買斷者我會教你如何創建自己的機器人</li>
+                    <li>會透過Claude.ai將程式整理優化，可選擇不使用AI工具但價格和保養複雜度由你承擔</li>
+                </ul>
+                <h3>議價規則</h3>
+                <p><strong>行數計算 Effective Line of Code (ELOC)</strong></p>
+                <ul>
+                    <li>不含註解、不含美觀換行、不含簡單全域變數宣告行、不含引入和定義</li>
+                    <li>只有含有功能的程式和定義的副函式才會納入計算</li>
+                    <li>50行為1單位並且會根據情況做定價，並且保證你不會有任何虧損請放心</li>
+                    <li>(例如第一項功能70行第二項功能98行，會以功能一50行和功能二100行定價)</li>
+                    <li>如果呼叫到一次副函式，那麼該行呼叫函式行會算為被呼叫函式的行數</li>
+                    <li>(簡單來說有5行程式，但其中一行是呼叫7行的函式，那我會算為4+7=11行，估算為10行)</li>
+                    <li>根據功能困難度定價1單位，分為1000、1500、2000，困難度可以進行討論而定義</li>
+                </ul>
+            </div>
+
+            <div id="twitch" class="section">
+                <h2>Twitch指令說明</h2>
+                <h3>指令使用說明</h3>
+                <ul>
+                    <li>指令前面一定要加半形驚嘆號</li>
+                    <li>說明中有畫底線的皆為可以自行調整的數值或參數</li>
+                </ul>
+                <h3>可使用指令</h3>
+                <ul>
+                    <li><strong>!dc</strong> - 機器人會輸出Zen Studio的Discord群組連結</li>
+                    <li><strong>!yt</strong> - 機器人會輸出我的YouTube頻道連結</li>
+                    <li><strong>!osu</strong> - 機器人會輸出我的osu!個人檔案連結</li>
+                </ul>
+                <h3>賭博指令</h3>
+                <ul>
+                    <li><strong>!賭 number(整數值)</strong> - 使用你持有貢丸中的<span style="text-decoration: underline;">number</span>顆進行賭博，CD時間為1分鐘</li>
+                    <li><strong>!賭 percentage(可小數但建議整數)%</strong> - 使用你持有貢丸中的<span style="text-decoration: underline;">percentage%</span>進行賭博，CD時間為1分鐘</li>
+                    <li><strong>!賭 all</strong> - 使用你所有的貢丸進行賭博，CD時間為1分鐘</li>
+                    <li><strong>!給 使用者名稱(不需要加@也不要使用暱稱) number(整數值)</strong> - 給予使用者名稱之用戶<span style="text-decoration: underline;">number</span>顆貢丸</li>
+                    <li><strong>!查</strong> - 查詢你的貢丸數量</li>
+                    <li><strong>!領取</strong> - 可以手動領取20顆貢丸，CD時間為30分鐘</li>
+                </ul>
+                <p>以下為抖內時會贈送的貢丸以及加成比例 (請參考附件圖片)</p>
+            </div>
+
+            <div id="skills" class="section">
+                <h2>所學技能</h2>
+                <p>這裡是我目前所學的技能，未來會不定期更新。</p>
+                <h3>Python</h3>
+                <p>目前學習Python第三年並且邁向第四年，擅長開發Discord Bot以及Twitch Bot，目前正在學習透過Python使用DQN深度學習訓練</p>
+                <h3>C++ & C語言</h3>
+                <p>C++是一開始接觸程式語言的第一個學習語言，從高一到高三都是使用C++語言開發，目前透過單人自學能力做出一個使用C++語言開發的連點器，那C語言的部分是從高三至目前在學校普遍使用的語言，目前沒有任何開發項目使用C語言開發</p>
+                <h3>HTML & CSS & JavaScript</h3>
+                <p>網頁語言與JS目前比較少使用，因為個人擅長後端而不是前端，但因為V圈小工具需要大量的UI小工具，所以最近開始將學習主力轉移到網站語言以及JS，目前開發過YouTube音樂擷取器、番茄鐘工具、其他小工具以及此網站</p>
+                <br>
+                <h3>Adobe After Effect</h3>
+                <p>沒有特別學習AE如何使用，只是覺得做出來的作品很喜歡有成就感，所以就默默地使用到現在，目前做過很多東西包括Loading的背景影片等皆為個人從0到成品</p>
+                <h3>Adobe Photoshop</h3>
+                <p>PS的部分其實沒有特別學著如何使用就是了，頂多需要做什麼查個網路用一用而已</p>
+                <h3>Adobe Illustrator</h3>
+                <p>AI使用比較頻繁，因為AI是製作圖形類素材的強大軟體之一，像是Loading的框架就是使用AI做出來的，做過的東西不多就不獻醜了</p>
+                <h3>Adobe Premiere Pro</h3>
+                <p>老實講用來轉檔比較多w</p>
+            </div>
+
+            <div id="partners" class="section">
+                <h2>協作夥伴與贊助者</h2>
+                <div class="partner-header">
+                    <h2>Zenen 老闆&資助人</h2>
+                </div>
+                <div class="partner-content">
+                    <div class="partner-left">
+                        <img src="https://a.imglink.io/RbWx4.jpg" alt="Zenen">
+                    </div>
+                    <div class="partner-right">
+                        <h3>介紹</h3>
+                        <p>Zenen是我的第一位合作人，也是第一個我加入工作室的老闆，雖然身為老闆，但他並沒有在其他老闆上常看到的傲慢態度，反而會聽聽底下其他員工們的想法以及專業建議，並且統整出一個最佳方案。</p>
+                        <h3>人物設定</h3>
+                        <p>『現在是奧多前28年（西元2022年），終於...能和大家聯繫了我來自奧多3年（西元2053年）。透過蓋亞母親的協助穿越時間線來到這裡，目的是為了能修正未來，讓我們人類族能重新與高我聯繫，並從「命迴題」中揚升。』</p>
+                        <p>『在未來，我們時空裡的人類族活在幻象中，幻象是掉入深井無法求援的孤寂，也是蜷縮斷垣殘壁毫無遮蔽的寒慄，但那不是被加諸的危害，而是自身創造的實像。』</p>        
+                        <p>『為了得到永續能源與永生，地球戰爭持續數年，使得環境逐漸與火星相似，甚至已將魔爪伸向銀河系，但他們並不知道擁有越多的同時也種下無數仇恨的種子，最終得到提升的只剩戰爭檔次。』</p>                        
+                        <p>『被忘卻的「命迴題」最終成了膚淺的儀式…。』</p>                        
+                    </div>
+                </div>
+                <div class="partner-buttons">
+                    <a href="https://www.youtube.com/@zenen.vtuber/shorts" class="button">YouTube</a>
+                    <a href="https://www.twitch.tv/zenenvtuber" class="button">Twitch</a>
+                    <a href="https://discord.com/invite/dZpCb2PZT9" class="button">Discord</a>
+                    <a href="https://zenen.my.canva.site/zenen" class="button">More Info</a>
+                </div>
+                <br>
+                <div class="partner-header">
+                    <h2>Muika 繪師&建模師&設計師</h2>
+                </div>
+                <div class="partner-content">
+                    <div class="partner-left">
+                        <img src="https://a.imglink.io/Rs6Zg.jpg" alt="Muika">
+                    </div>
+                    <div class="partner-right">
+                        <h3>介紹</h3>
+                        <p>Muika目前在v圈是一條龍繪師以及設計師，並且人超好溝通!!通靈能力也很厲害!!，所以如果想要找他委託不需要感到害怕，她很好溝通真的!!!，並且價格沒有高貴台灣繪師價格反而是平民價，而且還比較優質(阿熊認證)，大推大推!!</p>
+                        <h3>人物設定</h3>
+                        <p>來自十一次元的懶惰拖稿睡魔, 承接各式委託。</p>
+                        <p>愛睡覺和喜歡三角形</p>
+                        <h3>委託內容</h3>
+                        <ul>
+                            <li>插圖</li>
+                            <li>二次創作</li>
+                            <li>表情符號&徽章</li>
+                            <li>vtuber</li>
+                            <li>Live2D 動畫</li>
+                            <li>Live2D 建模</li>
+                            <li>2D 動畫</li>
+                            <li>平面設計</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="partner-buttons">
+                    <a href="https://www.twitch.tv/kawap_0" class="button">Twitch</a>
+                    <a href="https://mui0706.wixsite.com/home" class="button">About Me</a>
+                    <a href="https://lit.link/en/KawaP" class="button">lit.link</a>
                 </div>
             </div>
-        </section>
 
-        <!-- 委託資訊 -->
-        <div id="commission" class="section">
-            <h2>委託資訊</h2>
-            <h3>Discord Bot客製化服務</h3>
-            <p><strong>注意事項 Precautions</strong></p>
-            <ul>
-                <li>使用Python語言</li>
-                <li>會提供虛擬環境以及執行批次檔</li>
-                <li>第一次執行時有可能會有些許意外所以我需要一旁觀察</li>
-                <li>我會在你的群觀察程式是否有bug(委託能動就好方案則不會)</li>
-                <li>但如果是因為自己修改原始碼導致的bug，不處理，想嘗試請自行備份</li>
-                <li>買斷者我會教你如何創建自己的機器人</li>
-                <li>會透過Claude.ai將程式整理優化，可選擇不使用AI工具但價格和保養複雜度由你承擔</li>
-            </ul>
-            <h3>議價規則</h3>
-            <p><strong>行數計算 Effective Line of Code (ELOC)</strong></p>
-            <ul>
-                <li>不含註解、不含美觀換行、不含簡單全域變數宣告行、不含引入和定義</li>
-                <li>只有含有功能的程式和定義的副函式才會納入計算</li>
-                <li>50行為1單位並且會根據情況做定價，並且保證你不會有任何虧損請放心</li>
-                <li>(例如第一項功能70行第二項功能98行，會以功能一50行和功能二100行定價)</li>
-                <li>如果呼叫到一次副函式，那麼該行呼叫函式行會算為被呼叫函式的行數</li>
-                <li>(簡單來說有5行程式，但其中一行是呼叫7行的函式，那我會算為4+7=11行，估算為10行)</li>
-                <li>根據功能困難度定價1單位，分為1000、1500、2000，困難度可以進行討論而定義</li>
-            </ul>
+            <div id="donators" class="section">
+                <h2>抖內人士</h2>
+                <div class="donators-grid">
+                    <div class="donator">
+                        <h3>祤叶</h3>
+                        <img src="https://static-cdn.jtvnw.net/jtv_user_pictures/b8ea1de5-1036-4e43-b914-c04406a60f88-profile_image-70x70.png" alt="祤叶">
+                        <p>訂閱贈訂數: 5</p>
+                        <p>小奇點數: 900</p>
+                        <p>錢錢(NTD): 0</p>
+                    </div>
+                    <div class="donator">
+                        <h3>吖玄玄</h3>
+                        <img src="https://static-cdn.jtvnw.net/jtv_user_pictures/f7d08096-16f6-4dad-9c3b-c9d3e3793094-profile_image-70x70.png" alt="吖玄玄">
+                        <p>訂閱贈訂數: 1</p>
+                        <p>小奇點數: 470</p>
+                        <p>錢錢(NTD): 0</p>
+                    </div>
+                    <div class="donator">
+                        <h3>貓鬼</h3>
+                        <img src="https://yt3.googleusercontent.com/xblxqEItJB5teiHJ7ePlFJ7S6KJSjCye_-aPujy59VyV826NcwewOMxFgxi0YINXRC41UyGA6cM=s160-c-k-c0x00ffffff-no-rj" alt="貓鬼">
+                        <p>訂閱贈訂數: 0</p>
+                        <p>小奇點數: 0</p>
+                        <p>錢錢(NTD): 約2000新台幣</p>
+                    </div>
+                    <div class="donator">
+                        <h3>qwezxc056</h3>
+                        <img src="https://static-cdn.jtvnw.net/user-default-pictures-uv/ebb84563-db81-4b9c-8940-64ed33ccfc7b-profile_image-70x70.png" alt="qwezxc056">
+                        <p>訂閱贈訂數: 11</p>
+                        <p>小奇點數: 0</p>
+                        <p>錢錢(NTD): 0</p>
+                    </div>
+                    <div class="donator">
+                        <h3>抹茶星巴克</h3>
+                        <img src="https://static-cdn.jtvnw.net/jtv_user_pictures/32262df9-124d-445c-b353-1aec69fb567c-profile_image-70x70.png" alt="抹茶星巴克">
+                        <p>訂閱贈訂數: 3</p>
+                        <p>小奇點數: 10</p>
+                        <p>錢錢(NTD): 0</p>
+                    </div>
+                    <div class="donator">
+                        <h3>VALORANT</h3>
+                        <img src="https://static-cdn.jtvnw.net/jtv_user_pictures/34c5c8da-19b6-47b2-85ba-cc7ae87f1413-profile_image-70x70.png" alt="VALORANT">
+                        <p>訂閱贈訂數: 3</p>
+                        <p>小奇點數: 0</p>
+                        <p>錢錢(NTD): 0</p>
+                    </div>
+                    <div class="donator">
+                        <h3>passing_nousagi_lolicon</h3>
+                        <img src="https://static-cdn.jtvnw.net/user-default-pictures-uv/ead5c8b2-a4c9-4724-b1dd-9f00b46cbd3d-profile_image-70x70.png" alt="passing_nousagi_lolicon">
+                        <p>訂閱贈訂數: 0</p>
+                        <p>小奇點數: 10</p>
+                        <p>錢錢(NTD): 0</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="achievement" class="section">
+                <h2>成就</h2>
+                <ul>
+                    <li>2023年2月與Zenen合作並在12月開始長期合作成為Zen Studio開發者</li>
+                    <li>2023年6月推特突破500追</li>
+                    <li>2023年6月使用滑鼠鍵盤osu!達到全球100000排名</li>
+                    <li>2023年6月達到台V滑鼠鍵盤osu!第一</li>
+                    <li>2023年12月達成Twitch實況盟友要求</li>
+                    <li>2024年11月8日使用滑鼠鍵盤達成osu!全球50000排名</li>
+                    <li>2024年11月8日使用滑鼠鍵盤達成osu!全球50000排名</li>
+                    <li>2025年3月推特突破1000追</li>
+                </ul>
+            </div>
+
+            <div id="links" class="section">
+                <h2>更多連結</h2>
+                <p>這裡是一些社交媒體的按鈕，點擊可以訪問我的社交媒體頁面。</p>
+                <div class="social-buttons">
+                    <a href="https://www.youtube.com/@RuwayHsu" target="_blank" class="button">YouTube</a>
+                    <a href="https://www.twitch.tv/ruwayhsu" target="_blank" class="button">Twitch</a>
+                    <a href="https://x.com/ruwayhsu" target="_blank" class="button">X (Twitter)</a>
+                    <a href="https://bsky.app/profile/ruwayhsu.bsky.social" target="_blank" class="button">Bluesky</a>
+                    <a href="https://discord.gg/CmbWrJb9em" target="_blank" class="button">Discord</a>
+                    <a href="https://osu.ppy.sh/users/19005866" target="_blank" class="button">osu!</a>
+                    <a href="https://x.com/RuwayHsuPBC" target="_blank" class="button">X (PBC)</a>
+                    <a href="https://www.threads.net/@ruwayhsupbc" target="_blank" class="button">Threads</a>
+                </div>
+            </div>
         </div>
 
-        <!-- Twitch指令說明 -->
-        <div id="twitch" class="section">
-            <h2>Twitch指令說明</h2>
-            <h3>指令使用說明</h3>
-            <ul>
-                <li>指令前面一定要加半形驚嘆號</li>
-                <li>說明中有畫底線的皆為可以自行調整的數值或參數</li>
-            </ul>
-            <h3>可使用指令</h3>
-            <ul>
-                <li><strong>!dc</strong> - 機器人會輸出Zen Studio的Discord群組連結</li>
-                <li><strong>!yt</strong> - 機器人會輸出我的YouTube頻道連結</li>
-                <li><strong>!osu</strong> - 機器人會輸出我的osu!個人檔案連結</li>
-            </ul>
-            <h3>賭博指令</h3>
-            <ul>
-                <li><strong>!賭 number(整數值)</strong> - 使用你持有貢丸中的<span style="text-decoration: underline;">number</span>顆進行賭博，CD時間為1分鐘</li>
-                <li><strong>!賭 percentage(可小數但建議整數)%</strong> - 使用你持有貢丸中的<span style="text-decoration: underline;">percentage%</span>進行賭博，CD時間為1分鐘</li>
-                <li><strong>!賭 all</strong> - 使用你所有的貢丸進行賭博，CD時間為1分鐘</li>
-                <li><strong>!給 使用者名稱(不需要加@也不要使用暱稱) number(整數值)</strong> - 給予使用者名稱之用戶<span style="text-decoration: underline;">number</span>顆貢丸</li>
-                <li><strong>!查</strong> - 查詢你的貢丸數量</li>
-                <li><strong>!領取</strong> - 可以手動領取20顆貢丸，CD時間為30分鐘</li>
-            </ul>
-            <p>以下為抖內時會贈送的貢丸以及加成比例 (請參考附件圖片)</p>
-        </div>
-
-        <!-- 所學技能 -->
-        <div id="skills" class="section">
-            <h2>所學技能</h2>
-            <p>這裡是我目前所學的技能，未來會不定期更新。</p>
-            <h3>Python</h3>
-            <p>目前學習Python第三年並且邁向第四年，擅長開發Discord Bot以及Twitch Bot，目前正在學習透過Python使用DQN深度學習訓練</p>
-            <h3>C++ & C語言</h3>
-            <p>C++是一開始接觸程式語言的第一個學習語言，從高一到高三都是使用C++語言開發，目前透過單人自學能力做出一個使用C++語言開發的連點器，那C語言的部分是從高三至目前在學校普遍使用的語言，目前沒有任何開發項目使用C語言開發</p>
-            <h3>HTML & CSS & JavaScript</h3>
-            <p>網頁語言與JS目前比較少使用，因為個人擅長後端而不是前端，但因為V圈小工具需要大量的UI小工具，所以最近開始將學習主力轉移到網站語言以及JS，目前開發過YouTube音樂擷取器、番茄鐘工具、其他小工具以及此網站</p>
-            <br>
-            <h3>Adobe After Effect</h3>
-            <p>沒有特別學習AE如何使用，只是覺得做出來的作品很喜歡有成就感，所以就默默地使用到現在，目前做過很多東西包括Loading的背景影片等皆為個人從0到成品</p>
-            <h3>Adobe Photoshop</h3>
-            <p>PS的部分其實沒有特別學著如何使用就是了，頂多需要做什麼查個網路用一用而已</p>
-            <h3>Adobe Illustrator</h3>
-            <p>AI使用比較頻繁，因為AI是製作圖形類素材的強大軟體之一，像是Loading的框架就是使用AI做出來的，做過的東西不多就不獻醜了</p>
-            <h3>Adobe Premiere Pro</h3>
-            <p>老實講用來轉檔比較多w</p>
-        </div>
-
-        <!-- 協作夥伴與贊助者 -->
-        <div id="partners" class="section">
-            <h2>協作夥伴與贊助者</h2>
-            <div class="partner-header">
-                <h2>Zenen 老闆&資助人</h2>
-            </div>
-            <div class="partner-content">
-                <div class="partner-left">
-                    <img src="https://a.imglink.io/RbWx4.jpg" alt="Zenen">
-                </div>
-                <div class="partner-right">
-                    <h3>介紹</h3>
-                    <p>Zenen是我的第一位合作人，也是第一個我加入工作室的老闆，雖然身為老闆，但他並沒有在其他老闆上常看到的傲慢態度，反而會聽聽底下其他員工們的想法以及專業建議，並且統整出一個最佳方案。</p>
-                    <h3>人物設定</h3>
-                    <p>『現在是奧多前28年（西元2022年），終於...能和大家聯繫了我來自奧多3年（西元2053年）。透過蓋亞母親的協助穿越時間線來到這裡，目的是為了能修正未來，讓我們人類族能重新與高我聯繫，並從「命迴題」中揚升。』</p>
-                    <p>『在未來，我們時空裡的人類族活在幻象中，幻象是掉入深井無法求援的孤寂，也是蜷縮斷垣殘壁毫無遮蔽的寒慄，但那不是被加諸的危害，而是自身創造的實像。』</p>        
-                    <p>『為了得到永續能源與永生，地球戰爭持續數年，使得環境逐漸與火星相似，甚至已將魔爪伸向銀河系，但他們並不知道擁有越多的同時也種下無數仇恨的種子，最終得到提升的只剩戰爭檔次。』</p>                        
-                    <p>『被忘卻的「命迴題」最終成了膚淺的儀式…。』</p>                        
-                </div>
-            </div>
-            <div class="partner-buttons">
-                <a href="https://www.youtube.com/@zenen.vtuber/shorts" class="button">YouTube</a>
-                <a href="https://www.twitch.tv/zenenvtuber" class="button">Twitch</a>
-                <a href="https://discord.com/invite/dZpCb2PZT9" class="button">Discord</a>
-                <a href="https://zenen.my.canva.site/zenen" class="button">More Info</a>
-            </div>
-            <br>
-            <div class="partner-header">
-                <h2>Muika 繪師&建模師&設計師</h2>
-            </div>
-            <div class="partner-content">
-                <div class="partner-left">
-                    <img src="https://a.imglink.io/Rs6Zg.jpg" alt="Muika">
-                </div>
-                <div class="partner-right">
-                    <h3>介紹</h3>
-                    <p>Muika目前在v圈是一條龍繪師以及設計師，並且人超好溝通!!通靈能力也很厲害!!，所以如果想要找他委託不需要感到害怕，她很好溝通真的!!!，並且價格沒有高貴台灣繪師價格反而是平民價，而且還比較優質(阿熊認證)，大推大推!!</p>
-                    <h3>人物設定</h3>
-                    <p>來自十一次元的懶惰拖稿睡魔, 承接各式委託。</p>
-                    <p>愛睡覺和喜歡三角形</p>
-                    <h3>委託內容</h3>
-                    <ul>
-                        <li>插圖</li>
-                        <li>二次創作</li>
-                        <li>表情符號&徽章</li>
-                        <li>vtuber</li>
-                        <li>Live2D 動畫</li>
-                        <li>Live2D 建模</li>
-                        <li>2D 動畫</li>
-                        <li>平面設計</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="partner-buttons">
-                <a href="https://www.twitch.tv/kawap_0" class="button">Twitch</a>
-                <a href="https://mui0706.wixsite.com/home" class="button">About Me</a>
-                <a href="https://lit.link/en/KawaP" class="button">lit.link</a>
-            </div>
-        </div>
-
-        <!-- 抖內人士 -->    
-        <div id="donators" class="section">
-            <h2>抖內人士</h2>
-            <div class="donators-grid">
-                <div class="donator">
-                    <h3>祤叶</h3>
-                    <img src="https://static-cdn.jtvnw.net/jtv_user_pictures/b8ea1de5-1036-4e43-b914-c04406a60f88-profile_image-70x70.png" alt="祤叶">
-                    <p>訂閱贈訂數: 5</p>
-                    <p>小奇點數: 900</p>
-                    <p>錢錢(NTD): 0</p>
-                </div>
-                <div class="donator">
-                    <h3>吖玄玄</h3>
-                    <img src="https://static-cdn.jtvnw.net/jtv_user_pictures/f7d08096-16f6-4dad-9c3b-c9d3e3793094-profile_image-70x70.png" alt="吖玄玄">
-                    <p>訂閱贈訂數: 1</p>
-                    <p>小奇點數: 470</p>
-                    <p>錢錢(NTD): 0</p>
-                </div>
-                <div class="donator">
-                    <h3>貓鬼</h3>
-                    <img src="https://yt3.googleusercontent.com/xblxqEItJB5teiHJ7ePlFJ7S6KJSjCye_-aPujy59VyV826NcwewOMxFgxi0YINXRC41UyGA6cM=s160-c-k-c0x00ffffff-no-rj" alt="貓鬼">
-                    <p>訂閱贈訂數: 0</p>
-                    <p>小奇點數: 0</p>
-                    <p>錢錢(NTD): 約2000新台幣</p>
-                </div>
-                <div class="donator">
-                    <h3>qwezxc056</h3>
-                    <img src="https://static-cdn.jtvnw.net/user-default-pictures-uv/ebb84563-db81-4b9c-8940-64ed33ccfc7b-profile_image-70x70.png" alt="qwezxc056">
-                    <p>訂閱贈訂數: 11</p>
-                    <p>小奇點數: 0</p>
-                    <p>錢錢(NTD): 0</p>
-                </div>
-                <div class="donator">
-                    <h3>抹茶星巴克</h3>
-                    <img src="https://static-cdn.jtvnw.net/jtv_user_pictures/32262df9-124d-445c-b353-1aec69fb567c-profile_image-70x70.png" alt="抹茶星巴克">
-                    <p>訂閱贈訂數: 3</p>
-                    <p>小奇點數: 10</p>
-                    <p>錢錢(NTD): 0</p>
-                </div>
-                <div class="donator">
-                    <h3>VALORANT</h3>
-                    <img src="https://static-cdn.jtvnw.net/jtv_user_pictures/34c5c8da-19b6-47b2-85ba-cc7ae87f1413-profile_image-70x70.png" alt="VALORANT">
-                    <p>訂閱贈訂數: 3</p>
-                    <p>小奇點數: 0</p>
-                    <p>錢錢(NTD): 0</p>
-                </div>
-                <div class="donator">
-                    <h3>passing_nousagi_lolicon</h3>
-                    <img src="https://static-cdn.jtvnw.net/user-default-pictures-uv/ead5c8b2-a4c9-4724-b1dd-9f00b46cbd3d-profile_image-70x70.png" alt="passing_nousagi_lolicon">
-                    <p>訂閱贈訂數: 0</p>
-                    <p>小奇點數: 10</p>
-                    <p>錢錢(NTD): 0</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- 成就 -->
-        <div id="achievement" class="section">
-            <h2>成就</h2>
-            <ul>
-                <li>2023年2月與Zenen合作並在12月開始長期合作成為Zen Studio開發者</li>
-                <li>2023年6月推特突破500追</li>
-                <li>2023年6月使用滑鼠鍵盤osu!達到全球100000排名</li>
-                <li>2023年6月達到台V滑鼠鍵盤osu!第一</li>
-                <li>2023年12月達成Twitch實況盟友要求</li>
-                <li>2024年11月8日使用滑鼠鍵盤達成osu!全球50000排名</li>
-                <li>2024年11月8日使用滑鼠鍵盤達成osu!全球50000排名</li>
-                <li>2025年3月推特突破1000追</li>
-            </ul>
-        </div>
-
-        <!-- 更多連結 -->
-        <div id="links" class="section">
-            <h2>更多連結</h2>
-            <p>這裡是一些社交媒體的按鈕，點擊可以訪問我的社交媒體頁面。</p>
-            <div class="social-buttons">
-                <a href="https://www.youtube.com/@RuwayHsu" target="_blank" class="button">YouTube</a>
-                <a href="https://www.twitch.tv/ruwayhsu" target="_blank" class="button">Twitch</a>
-                <a href="https://x.com/ruwayhsu" target="_blank" class="button">X (Twitter)</a>
-                <a href="https://bsky.app/profile/ruwayhsu.bsky.social" target="_blank" class="button">Bluesky</a>
-                <a href="https://discord.gg/CmbWrJb9em" target="_blank" class="button">Discord</a>
-                <a href="https://osu.ppy.sh/users/19005866" target="_blank" class="button">osu!</a>
-                <a href="https://x.com/RuwayHsuPBC" target="_blank" class="button">X (PBC)</a>
-                <a href="https://www.threads.net/@ruwayhsupbc" target="_blank" class="button">Threads</a>
-            </div>
+        <div class="footer">
+            <p>© 2025 RuwayHsu<a href="#" id="secret-link" class="secret-link">滷滷熊熊</a> | 跪求抖內支持</p>
         </div>
     </div>
 
-    <div class="footer">
-        <p>&copy; 2025 RuwayHsu滷滷熊熊 | 跪求抖內支持</p>
+    <div class="second_page">
+        <div class="container">
+            <div class="section visible">
+                <h2>隱藏頁面</h2>
+                <p>你發現了一個秘密頁面！</p>
+            </div>
+        </div>
     </div>
 
     <script>
-        // 使用 Intersection Observer 檢測 section 是否進入視窗
         document.addEventListener('DOMContentLoaded', () => {
             const sections = document.querySelectorAll('.section, #home-section');
             const observer = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('visible');
-                        observer.unobserve(entry.target); // 只觸發一次
+                        observer.unobserve(entry.target);
                     }
                 });
             }, {
-                threshold: 0.1 // 當 10% 的 section 可見時觸發
+                threshold: 0.1
             });
 
             sections.forEach(section => {
                 observer.observe(section);
+            });
+
+            const secretLink = document.getElementById('secret-link');
+            const secondPage = document.querySelector('.second_page');
+            const mainContent = document.querySelector('.main-content');
+
+            secretLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                mainContent.classList.add('hidden');
+                secondPage.classList.add('active');
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth' // 平滑滾動到頂部
+                });
             });
         });
     </script>
