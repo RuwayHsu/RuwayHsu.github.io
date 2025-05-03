@@ -341,21 +341,27 @@
         }
         .custom-table {
             width: 80%;
+            max-width: 100%; /* 確保表格不會超出容器 */
             margin: 20px auto;
             border-collapse: collapse;
+            table-layout: auto; /* 讓表格根據內容自動調整 */
         }
         .custom-table th, .custom-table td {
             padding: 10px;
             text-align: center;
-            font-size: 24px;
+            font-size: 24px; /* 默認字體大小 */
+            word-wrap: break-word; /* 允許長文字換行 */
+            white-space: normal; /* 確保文字可以換行 */
         }
         .custom-table th {
             color: #ff69b4;
             text-shadow: 0px 0px 8px #ff69b4;
+            border-bottom: 2px solid white;
         }
         .custom-table td {
             color: #ffffff;
             text-shadow: 0px 0px 8px #ffffff;
+            border-bottom: 1px solid #555;
         }
         .custom-table th {
             border-bottom: 2px solid white;
@@ -363,19 +369,98 @@
         .custom-table td {
             border-bottom: 1px solid #555;
         }
+        .top-row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px;
+            min-width: 0;
+            word-break: break-word;
+        }
+        .top-row > * {
+            flex-shrink: 1;
+            min-width: 100px;
+        }
+
+        /* Hamburger for <768px */
+        .hamburger {
+            display: none;
+            font-size: 24px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: white;
+        }
+        @media (max-width: 768px) {
+            .custom-table {
+                width: 100%; /* 在小螢幕上占滿寬度 */
+            }
+            .custom-table th, .custom-table td {
+                font-size: 18px; /* 中等螢幕縮小字體 */
+                padding: 8px; /* 減少內邊距 */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .custom-table th, .custom-table td {
+                font-size: 14px; /* 極小螢幕進一步縮小字體 */
+                padding: 6px; /* 進一步減少內邊距 */
+            }
+        }
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+            .nav-menu {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out;
+                opacity: 0;
+            }
+            .nav-menu.active {
+                max-height: 500px; /* 確保足夠高以容納所有選項 */
+                opacity: 1;
+            }
+            .nav-menu a {
+                transform: translateY(-20px);
+                opacity: 0;
+                transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+            }
+            .nav-menu.active a {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            /* 各個選項依次延遲出現 */
+            .nav-menu a:nth-child(1) { transition-delay: 0.05s; }
+            .nav-menu a:nth-child(2) { transition-delay: 0.1s; }
+            .nav-menu a:nth-child(3) { transition-delay: 0.15s; }
+            .nav-menu a:nth-child(4) { transition-delay: 0.2s; }
+            .nav-menu a:nth-child(5) { transition-delay: 0.25s; }
+            .nav-menu a:nth-child(6) { transition-delay: 0.3s; }
+            .nav-menu a:nth-child(7) { transition-delay: 0.35s; }
+            .nav-menu a:nth-child(8) { transition-delay: 0.4s; }
+            .nav-menu a:nth-child(9) { transition-delay: 0.45s; }
+        }
     </style>
 </head>
 <body>
+    <!-- 漢堡選單按鈕 -->
     <div class="nav">
-        <a href="#home-section">首頁</a>
-        <a href="#commission">委託資訊</a>
-        <a href="#schedule">我的周表</a>
-        <a href="#twitch">Twitch指令說明</a>
-        <a href="#skills">所學技能</a>
-        <a href="#partners">協作夥伴與贊助者</a>
-        <a href="#donators">抖內人士</a>
-        <a href="#achievement">成就</a>
-        <a href="#links">更多連結</a>
+        <button class="hamburger" onclick="toggleMenu()">☰</button>
+        <div class="nav-menu">
+            <a href="#home-section">首頁</a>
+            <a href="#commission">委託資訊</a>
+            <a href="#schedule">我的周表</a>
+            <a href="#twitch">Twitch指令說明</a>
+            <a href="#skills">所學技能</a>
+            <a href="#partners">協作夥伴與贊助者</a>
+            <a href="#donators">抖內人士</a>
+            <a href="#achievement">成就</a>
+            <a href="#links">更多連結</a>
+        </div>
     </div>
 
     <div class="main-content">
@@ -585,6 +670,8 @@
                     <a href="https://zenen.my.canva.site/zenen" class="button">More Info</a>
                 </div>
                 <br>
+                <hr style="border: none; border-top: 2px solid #ff69b4; box-shadow: 0 0px 5px #ff69b4;">
+                <br>
                 <div class="partner-header">
                     <h2>Muika 繪師&建模師&設計師</h2>
                 </div>
@@ -718,6 +805,10 @@
     </div>
 
     <script>
+        function toggleMenu() {
+            document.querySelector('.nav-menu').classList.toggle('active');
+        }
+    
         document.addEventListener('DOMContentLoaded', () => {
             // 現有的 IntersectionObserver 邏輯
             const sections = document.querySelectorAll('.section, #home-section');
@@ -731,21 +822,21 @@
             }, {
                 threshold: 0.1
             });
-
+    
             sections.forEach(section => {
                 observer.observe(section);
             });
-
+    
             const secretLink = document.getElementById('secret-link');
             const secondPage = document.querySelector('.second_page');
             const mainContent = document.querySelector('.main-content');
-
+    
             const backButton = document.createElement('button');
             backButton.classList.add('back-button');
             backButton.textContent = '返回主頁';
             document.body.appendChild(backButton);
             backButton.style.display = 'none';
-
+    
             secretLink.addEventListener('click', (e) => {
                 e.preventDefault();
                 mainContent.classList.add('hidden');
@@ -766,13 +857,36 @@
                     behavior: 'smooth'
                 });
             });
-
-            // 新增：從 Google 試算表抓取資料並更新 Schedule 表格
-            fetch('https://api.sheetbest.com/sheets/c4ef187f-1820-4f5b-8a66-947e86c029d9') // 替換為你的 sheet.best API 端點
+    
+            // 修改：為導航連結添加平滑滾動和收合功能
+            const navLinks = document.querySelectorAll('.nav-menu a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault(); // 阻止默認錨點跳轉行為
+                    const targetId = link.getAttribute('href').substring(1); // 獲取目標ID（去掉#）
+                    const targetElement = document.getElementById(targetId);
+    
+                    if (targetElement) {
+                        // 平滑滾動到目標元素
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start' // 滾動到元素頂部
+                        });
+                    }
+    
+                    // 如果是漢堡選單模式，收合選單
+                    if (window.innerWidth <= 768) {
+                        toggleMenu();
+                    }
+                });
+            });
+    
+            // 現有的 fetch 邏輯保持不變
+            fetch('https://api.sheetbest.com/sheets/c4ef187f-1820-4f5b-8a66-947e86c029d9')
                 .then(response => response.json())
                 .then(data => {
                     const tbody = document.getElementById('scheduleTableBody');
-                    tbody.innerHTML = ''; // 清空現有內容
+                    tbody.innerHTML = '';
                     data.forEach(item => {
                         const row = `
                             <tr>
@@ -784,7 +898,6 @@
                 })
                 .catch(error => {
                     console.error('抓取資料失敗:', error);
-                    // 若抓取失敗，顯示預設資料或錯誤訊息
                     const tbody = document.getElementById('scheduleTableBody');
                     tbody.innerHTML = `
                         <tr>
