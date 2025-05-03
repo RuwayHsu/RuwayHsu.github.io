@@ -16,7 +16,7 @@
     <meta name="twitter:description" content="目前網站還沒完工!!請稍後再撥!!逼逼~~">
     <!--<meta name="twitter:description" content="既然你看到這個了那我就說說這是什麼吧，這是一個有我的介紹、委託資訊、技能與社群連結的網站歡迎瀏覽支持我一下感謝感恩。">-->
     <meta name="twitter:image" content="https://a.imglink.io/RpAwo.png">
-    
+
     <link rel="icon" type="image/png" href="https://a.imglink.io/S9PuB.png">
     <title>RuwayHsu滷滷熊熊</title>
     <style>
@@ -371,6 +371,19 @@
         .custom-table td {
             border-bottom: 1px solid #555;
         }
+        .partner-right img {
+            max-width: 100%; /* 限制圖片寬度不超出容器 */
+            height: auto; /* 保持圖片比例 */
+            display: block; /* 避免圖片與文字間的間隙問題 */
+            border-radius: 10px; /* 與其他圖片保持一致的圓角 */
+        }
+
+        /* 在窄螢幕模式下隱藏 .partner-right 內的圖片 */
+        @media (max-width: 960px) {
+            .partner-right img {
+                display: none; /* 960px 以下隱藏圖片 */
+            }
+        }
         .top-row {
             display: flex;
             flex-wrap: wrap;
@@ -704,6 +717,27 @@
                     <a href="https://www.twitch.tv/kawap_0" class="button">Twitch</a>
                     <a href="https://mui0706.wixsite.com/home" class="button">About Me</a>
                     <a href="https://lit.link/en/KawaP" class="button">lit.link</a>
+                </div>
+                <br>
+                <hr style="border: none; border-top: 2px solid #ff69b4; box-shadow: 0 0px 5px #ff69b4;">
+                <br>
+                <div class="partner-header">
+                    <h2>Mikado Arashi 阿嵐 頭貼繪師&Q版模型原作者</h2>
+                </div>
+                <div class="partner-content">
+                    <div class="partner-left">
+                        <img src="https://a.imglink.io/S9keE.jpg" alt="Muika">
+                    </div>
+                    <div class="partner-right">
+                        <h3>熊熊真心話</h3>
+                        <p>阿嵐是我認為御姊風格類模型最厲害的一條龍繪師，當初會看見阿嵐的原因是因為妍妍Q版自定義模型 的販售，接著仔細去看他的作品才發現他的御姊模型很香ww(x，那因為真的很香所以就委託頭貼試看看結果光是草圖就愛了哈哈，總之有姊姊風格需求的人們可以找阿嵐，大推!!!</p>
+                        <img src="https://pbs.twimg.com/media/GNMr27XbgAAPlIq?format=jpg&name=medium" alt="阿嵐可愛圖">
+                    </div>
+                </div>
+                <div class="partner-buttons">
+                    <a href="https://x.com/mikado_arashi" class="button">Twitter</a>
+                    <a href="https://www.twitch.tv/mikado_arashi" class="button">Twitch</a>
+                    <a href="https://portaly.cc/Finding.Arashi" class="button">About me</a>
                 </div>
             </div>
 
