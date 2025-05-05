@@ -30,11 +30,13 @@
             padding: 0;
             transition: all 0.5s ease;
         }
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
         }
+
         .nav {
             background: #3a2a4d;
             padding: 10px 0;
@@ -43,15 +45,18 @@
             top: 0;
             z-index: 1000;
         }
+
         .nav a {
             color: #ff99cc;
             margin: 0 15px;
             text-decoration: none;
             font-weight: bold;
         }
+
         .nav a:hover {
             color: #ffffff;
         }
+
         .section {
             margin: 20px 0;
             padding: 20px;
@@ -61,17 +66,23 @@
             transform: translateY(50px);
             transition: opacity 0.6s ease-out, transform 0.6s ease-out;
         }
+
         .section.visible {
             opacity: 1;
             transform: translateY(0);
         }
-        h1, h2, h3 {
+
+        h1,
+        h2,
+        h3 {
             color: #ff99cc;
         }
+
         ul {
             list-style-type: disc;
             padding-left: 20px;
         }
+
         #home-section {
             margin: 20px 0;
             padding: 20px;
@@ -81,10 +92,12 @@
             transform: translateY(50px);
             transition: opacity 0.6s ease-out, transform 0.6s ease-out;
         }
+
         #home-section.visible {
             opacity: 1;
             transform: translateY(0);
         }
+
         .home-content {
             display: flex;
             gap: 20px;
@@ -92,12 +105,14 @@
             margin: 0 auto;
             align-items: stretch;
         }
+
         .left-column {
             flex: 0 0 50%;
             max-width: 50%;
             position: relative;
             overflow: hidden;
         }
+
         .left-column img {
             position: absolute;
             top: 0;
@@ -107,15 +122,18 @@
             object-fit: cover;
             border-radius: 10px;
         }
+
         .right-column {
             flex: 1;
             text-align: left;
             padding: 20px;
         }
+
         @media (max-width: 960px) {
             .home-content {
                 flex-direction: column;
             }
+
             .left-column {
                 max-width: 100%;
                 flex: 1 1 auto;
@@ -124,6 +142,7 @@
                 margin-bottom: 20px;
                 order: 1;
             }
+
             .left-column img {
                 position: static;
                 display: block;
@@ -132,6 +151,7 @@
                 object-fit: cover;
                 border-radius: 10px;
             }
+
             .right-column {
                 max-width: 100%;
                 flex: 1 1 auto;
@@ -139,6 +159,7 @@
                 order: 2;
             }
         }
+
         .social-buttons {
             display: flex;
             flex-wrap: wrap;
@@ -146,6 +167,7 @@
             gap: 20px;
             margin: 20px 0;
         }
+
         .button {
             background: transparent;
             border: 2px solid #ff69b4;
@@ -159,15 +181,18 @@
             flex: 0 0 calc(25% - 20px);
             box-sizing: border-box;
         }
+
         .button:hover {
             background: #ff69b4;
             color: #ffffff;
         }
+
         @media (max-width: 768px) {
             .button {
                 flex: 0 0 calc(50% - 20px);
             }
         }
+
         .footer {
             text-align: center;
             color: #ffb8db;
@@ -176,47 +201,57 @@
             margin-top: 10px;
             transition: opacity 0.5s ease;
         }
+
         .partner-header {
             text-align: left;
             margin-bottom: 20px;
         }
+
         .partner-header h2 {
             margin: 0;
             font-size: 2em;
             color: #ff99cc;
         }
+
         .partner-content {
             display: flex;
             gap: 20px;
             align-items: flex-start;
         }
+
         .partner-left {
             flex: 0 0 40%;
             max-width: 40%;
         }
+
         .partner-left img {
             width: 100%;
             height: auto;
             border-radius: 10px;
         }
+
         .partner-right {
             flex: 1;
             text-align: left;
         }
+
         .partner-right a {
             color: #ffffff;
             margin: 0 15px;
             text-decoration: underline;
         }
+
         .partner-right a:hover {
             color: #ff69b4;
         }
+
         .partner-buttons {
             display: flex;
             justify-content: center;
             gap: 10px;
             margin-top: 20px;
         }
+
         .partner-buttons .button {
             border: 2px solid #ff69b4;
             color: #ff69b4;
@@ -226,46 +261,56 @@
             font-weight: bold;
             transition: background 0.3s, color 0.3s;
         }
+
         .partner-buttons .button:hover {
             background: #ff69b4;
             color: #ffffff;
         }
+
         @media (max-width: 960px) {
             .partner-header {
                 text-align: center;
             }
+
             .partner-content {
                 flex-direction: column;
                 align-items: center;
                 text-align: center;
             }
+
             .partner-left {
                 max-width: 100%;
             }
+
             .partner-right {
                 max-width: 100%;
                 padding: 15px 0;
             }
         }
+
         @media (max-width: 768px) {
             .partner-buttons {
                 flex-wrap: wrap;
                 gap: 10px;
             }
+
             .partner-buttons .button {
                 flex: 0 0 calc(50% - 10px);
                 text-align: center;
             }
+
             .partner-buttons .button:nth-child(odd):only-child {
                 flex: 0 0 100%;
             }
         }
+
         .donators-grid {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             gap: 20px;
         }
+
         .donator {
             flex: 0 0 calc(25% - 20px);
             box-sizing: border-box;
@@ -274,22 +319,26 @@
             padding: 10px;
             border-radius: 10px;
         }
+
         .donator img {
             width: 100px;
             height: 100px;
             border-radius: 50%;
             margin: 10px 0;
         }
+
         @media (max-width: 960px) {
             .donator {
                 flex: 0 0 calc(50% - 20px);
             }
         }
+
         @media (max-width: 600px) {
             .donator {
                 flex: 0 0 100%;
             }
         }
+
         .second_page {
             display: none;
             position: fixed;
@@ -302,31 +351,38 @@
             overflow-y: auto;
             padding-top: 60px;
         }
+
         .second_page.active {
             display: block;
         }
+
         .main-content {
             transition: opacity 0.5s ease;
         }
+
         .main-content.hidden {
             opacity: 0;
             pointer-events: none;
         }
+
         .secret-link {
             color: #ffb8db;
             text-decoration: none;
             font-size: inherit;
             transition: font-size 0.3s ease;
         }
+
         .secret-link:hover {
             font-size: 1.2em;
         }
+
         .second_page .section p {
             word-wrap: break-word;
             white-space: normal;
             line-height: 1.5;
             margin: 10px 0;
         }
+
         .back-button {
             position: fixed;
             bottom: 20px;
@@ -340,52 +396,53 @@
             z-index: 1001;
             font-weight: bold;
         }
+
         .back-button:hover {
             background: #ff99cc;
         }
+
         .custom-table {
             width: 80%;
-            max-width: 100%; /* 確保表格不會超出容器 */
+            max-width: 100%;
             margin: 20px auto;
             border-collapse: collapse;
-            table-layout: auto; /* 讓表格根據內容自動調整 */
+            table-layout: auto;
         }
-        .custom-table th, .custom-table td {
+
+        .custom-table th,
+        .custom-table td {
             padding: 10px;
             text-align: center;
-            font-size: 24px; /* 默認字體大小 */
-            word-wrap: break-word; /* 允許長文字換行 */
-            white-space: normal; /* 確保文字可以換行 */
+            font-size: 24px;
+            word-wrap: break-word;
+            white-space: normal;
         }
+
         .custom-table th {
             color: #ff69b4;
             text-shadow: 0px 0px 8px #ff69b4;
             border-bottom: 2px solid white;
         }
+
         .custom-table td {
             color: #ffffff;
             text-shadow: 0px 0px 8px #ffffff;
             border-bottom: 1px solid #555;
         }
-        .custom-table th {
-            border-bottom: 2px solid white;
-        }
-        .custom-table td {
-            border-bottom: 1px solid #555;
-        }
+
         .partner-right img {
-            max-width: 100%; /* 限制圖片寬度不超出容器 */
-            height: auto; /* 保持圖片比例 */
-            display: block; /* 避免圖片與文字間的間隙問題 */
-            border-radius: 10px; /* 與其他圖片保持一致的圓角 */
+            max-width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 10px;
         }
 
-        /* 在窄螢幕模式下隱藏 .partner-right 內的圖片 */
         @media (max-width: 960px) {
             .partner-right img {
-                display: none; /* 960px 以下隱藏圖片 */
+                display: none;
             }
         }
+
         .top-row {
             display: flex;
             flex-wrap: wrap;
@@ -394,12 +451,12 @@
             min-width: 0;
             word-break: break-word;
         }
+
         .top-row > * {
             flex-shrink: 1;
             min-width: 100px;
         }
 
-        /* Hamburger for <768px */
         .hamburger {
             display: none;
             font-size: 24px;
@@ -408,26 +465,32 @@
             cursor: pointer;
             color: white;
         }
+
         @media (max-width: 768px) {
             .custom-table {
-                width: 100%; /* 在小螢幕上占滿寬度 */
+                width: 100%;
             }
-            .custom-table th, .custom-table td {
-                font-size: 18px; /* 中等螢幕縮小字體 */
-                padding: 8px; /* 減少內邊距 */
+
+            .custom-table th,
+            .custom-table td {
+                font-size: 18px;
+                padding: 8px;
             }
         }
 
         @media (max-width: 480px) {
-            .custom-table th, .custom-table td {
-                font-size: 14px; /* 極小螢幕進一步縮小字體 */
-                padding: 6px; /* 進一步減少內邊距 */
+            .custom-table th,
+            .custom-table td {
+                font-size: 14px;
+                padding: 6px;
             }
         }
+
         @media (max-width: 768px) {
             .hamburger {
                 display: block;
             }
+
             .nav-menu {
                 display: flex;
                 flex-direction: column;
@@ -437,34 +500,70 @@
                 transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out;
                 opacity: 0;
             }
+
             .nav-menu.active {
-                max-height: 500px; /* 確保足夠高以容納所有選項 */
+                max-height: 500px;
                 opacity: 1;
             }
+
             .nav-menu a {
                 transform: translateY(-20px);
                 opacity: 0;
                 transition: transform 0.3s ease-out, opacity 0.3s ease-out;
             }
+
             .nav-menu.active a {
                 transform: translateY(0);
                 opacity: 1;
             }
-            /* 各個選項依次延遲出現 */
-            .nav-menu a:nth-child(1) { transition-delay: 0.05s; }
-            .nav-menu a:nth-child(2) { transition-delay: 0.1s; }
-            .nav-menu a:nth-child(3) { transition-delay: 0.15s; }
-            .nav-menu a:nth-child(4) { transition-delay: 0.2s; }
-            .nav-menu a:nth-child(5) { transition-delay: 0.25s; }
-            .nav-menu a:nth-child(6) { transition-delay: 0.3s; }
-            .nav-menu a:nth-child(7) { transition-delay: 0.35s; }
-            .nav-menu a:nth-child(8) { transition-delay: 0.4s; }
-            .nav-menu a:nth-child(9) { transition-delay: 0.45s; }
+
+            .nav-menu a:nth-child(1) {
+                transition-delay: 0.05s;
+            }
+
+            .nav-menu a:nth-child(2) {
+                transition-delay: 0.1s;
+            }
+
+            .nav-menu a:nth-child(3) {
+                transition-delay: 0.15s;
+            }
+
+            .nav-menu a:nth-child(4) {
+                transition-delay: 0.2s;
+            }
+
+            .nav-menu a:nth-child(5) {
+                transition-delay: 0.25s;
+            }
+
+            .nav-menu a:nth-child(6) {
+                transition-delay: 0.3s;
+            }
+
+            .nav-menu a:nth-child(7) {
+                transition-delay: 0.35s;
+            }
+
+            .nav-menu a:nth-child(8) {
+                transition-delay: 0.4s;
+            }
+
+            .nav-menu a:nth-child(9) {
+                transition-delay: 0.45s;
+            }
+
+            .nav-menu a:nth-child(10) {
+                transition-delay: 0.5s;
+            }
+
+            .nav-menu a:nth-child(11) {
+                transition-delay: 0.55s;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- 漢堡選單按鈕 -->
     <div class="nav">
         <button class="hamburger" onclick="toggleMenu()">☰</button>
         <div class="nav-menu">
@@ -546,7 +645,7 @@
                     <li>根據功能困難度定價1單位，分為1000、1500、2000，困難度可以進行討論而定義</li>
                 </ul>
             </div>
-            
+
             <div id="schedule" class="section">
                 <h2>我的周表</h2>
                 <h3>這真的會實時更新!!!</h3>
@@ -670,16 +769,16 @@
                         <p>Zenen是我的第一位合作人，也是第一個我加入工作室的老闆，雖然身為老闆，但他並沒有在其他老闆上常看到的傲慢態度，反而會聽聽底下其他員工們的想法以及專業建議，並且統整出一個最佳方案。</p>
                         <h3>人物設定</h3>
                         <p>『現在是奧多前28年（西元2022年），終於...能和大家聯繫了我來自奧多3年（西元2053年）。透過蓋亞母親的協助穿越時間線來到這裡，目的是為了能修正未來，讓我們人類族能重新與高我聯繫，並從「命迴題」中揚升。』</p>
-                        <p>『在未來，我們時空裡的人類族活在幻象中，幻象是掉入深井無法求援的孤寂，也是蜷縮斷垣殘壁毫無遮蔽的寒慄，但那不是被加諸的危害，而是自身創造的實像。』</p>        
-                        <p>『為了得到永續能源與永生，地球戰爭持續數年，使得環境逐漸與火星相似，甚至已將魔爪伸向銀河系，但他們並不知道擁有越多的同時也種下無數仇恨的種子，最終得到提升的只剩戰爭檔次。』</p>                        
-                        <p>『被忘卻的「命迴題」最終成了膚淺的儀式…。』</p>  
+                        <p>『在未來，我們時空裡的人類族活在幻象中，幻象是掉入深井無法求援的孤寂，也是蜷縮斷垣殘壁毫無遮蔽的寒慄，但那不是被加諸的危害，而是自身創造的實像。』</p>
+                        <p>『為了得到永續能源與永生，地球戰爭持續數年，使得環境逐漸與火星相似，甚至已將魔爪伸向銀河系，但他們並不知道擁有越多的同時也種下無數仇恨的種子，最終得到提升的只剩戰爭檔次。』</p>
+                        <p>『被忘卻的「命迴題」最終成了膚淺的儀式…。』</p>
                         <h3>工作室成員</h3>
                         <ul>
                             <li><a href="https://zenen.my.canva.site/zenen">Zenen禪音</a></li>
                             <li><a href="https://www.youtube.com/@BATLE.vtuber">Batle巴特</a></li>
                             <li><a href="https://www.youtube.com/@soulkaos.vtuber">Soul Kaos蘇凱奧</a></li>
                             <li><a href="https://ruwayhsu.github.io/">RuwayHsu滷滷熊熊</a></li>
-                        </ul>                  
+                        </ul>
                     </div>
                 </div>
                 <div class="partner-buttons">
@@ -869,21 +968,23 @@
                     <li>廣告費用需在廣告開始前支付，具體金額可根據實際情況協商。</li>
                 </ul>
                 <h3>以下提供給你們兩個工商廣告管道</h3>
-                <ol>Loading廣告
-                    <ul>
-                        <li>此廣告為在Loading時的廣告</li>
-                        <li>一份廣告時長提供120秒</li>
-                        <li>一次撥放12秒，3秒進行轉場至下一份廣告</li>
-                        <li>廣告時長並不會平分，如果需要多份廣告平分額度那將以1.25的n次方計算，無條件捨去百位數(不含)</li>
-                        <li>圖片限制為寬930px高325px之png或jpg</li>
-                    </ul>
-                </ol>
-                <ol>實況介面廣告
-                    <ul>
-                        <li>此廣告為在實況時的廣告</li>
-                        <li>需要給予我播放、中斷時長，例如播放1分鐘中斷29分鐘，總計30分鐘</li>
-                        <li>圖片限制為寬800px高200px，圓角36px之png或jpg</li>
-                    </ul>
+                <ol>
+                    <li>Loading廣告
+                        <ul>
+                            <li>此廣告為在Loading時的廣告</li>
+                            <li>一份廣告時長提供120秒</li>
+                            <li>一次撥放12秒，3秒進行轉場至下一份廣告</li>
+                            <li>廣告時長並不會平分，如果需要多份廣告平分額度那將以1.25的n次方計算，無條件捨去百位數(不含)</li>
+                            <li>圖片限制為寬930px高325px之png或jpg</li>
+                        </ul>
+                    </li>
+                    <li>實況介面廣告
+                        <ul>
+                            <li>此廣告為在實況時的廣告</li>
+                            <li>需要給予我播放、中斷時長，例如播放1分鐘中斷29分鐘，總計30分鐘</li>
+                            <li>圖片限制為寬800px高200px，圓角36px之png或jpg</li>
+                        </ul>
+                    </li>
                 </ol>
             </div>
 
@@ -921,9 +1022,8 @@
         function toggleMenu() {
             document.querySelector('.nav-menu').classList.toggle('active');
         }
-    
+
         document.addEventListener('DOMContentLoaded', () => {
-            // 現有的 IntersectionObserver 邏輯
             const sections = document.querySelectorAll('.section, #home-section');
             const observer = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
@@ -935,21 +1035,21 @@
             }, {
                 threshold: 0.1
             });
-    
+
             sections.forEach(section => {
                 observer.observe(section);
             });
-    
+
             const secretLink = document.getElementById('secret-link');
             const secondPage = document.querySelector('.second_page');
             const mainContent = document.querySelector('.main-content');
-    
+
             const backButton = document.createElement('button');
             backButton.classList.add('back-button');
             backButton.textContent = '返回主頁';
             document.body.appendChild(backButton);
             backButton.style.display = 'none';
-    
+
             secretLink.addEventListener('click', (e) => {
                 e.preventDefault();
                 mainContent.classList.add('hidden');
@@ -960,7 +1060,7 @@
                     behavior: 'smooth'
                 });
             });
-            
+
             backButton.addEventListener('click', () => {
                 mainContent.classList.remove('hidden');
                 secondPage.classList.remove('active');
@@ -970,31 +1070,27 @@
                     behavior: 'smooth'
                 });
             });
-    
-            // 修改：為導航連結添加平滑滾動和收合功能
+
             const navLinks = document.querySelectorAll('.nav-menu a');
             navLinks.forEach(link => {
                 link.addEventListener('click', (e) => {
-                    e.preventDefault(); // 阻止默認錨點跳轉行為
-                    const targetId = link.getAttribute('href').substring(1); // 獲取目標ID（去掉#）
+                    e.preventDefault();
+                    const targetId = link.getAttribute('href').substring(1);
                     const targetElement = document.getElementById(targetId);
-    
+
                     if (targetElement) {
-                        // 平滑滾動到目標元素
                         targetElement.scrollIntoView({
                             behavior: 'smooth',
-                            block: 'start' // 滾動到元素頂部
+                            block: 'start'
                         });
                     }
-    
-                    // 如果是漢堡選單模式，收合選單
+
                     if (window.innerWidth <= 768) {
                         toggleMenu();
                     }
                 });
             });
-    
-            // 現有的 fetch 邏輯保持不變
+
             fetch('https://api.sheetbest.com/sheets/c4ef187f-1820-4f5b-8a66-947e86c029d9')
                 .then(response => response.json())
                 .then(data => {
