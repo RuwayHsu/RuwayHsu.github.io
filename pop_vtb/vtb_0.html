@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>V-Pop VTuber 競點計劃</title>
+<style>
+@font-face {
+    font-family: "count_font";
+    src: url("font/Eighto.ttf") format("truetype");
+}
+@font-face {
+    font-family: "word_font";
+    src: url("font/NaikaiFont-SemiBold.woff") format("truetype");
+}
+body {
+    font-family: 'word_font', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.game-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#vtuber {
+    cursor: pointer;
+    width: 200px;
+}
+#click-counter {
+    font-family: "count_font", sans-serif;
+    font-size: 64px;
+    color: #fff;
+    margin-top: 20px;
+}
+</style>
+</head>
+<body>
+    <div class="game-container">
+        <img src="img/num0/num0-close.png" alt="VTuber" id="vtuber">
+        <div id="click-counter">0</div>
+    </div>
+
+<script>
+// 預加載聲音檔案
+var popSound = new Audio('sound/pop.mp3');
+
+// 獲取圖片元素
+var vtuberImg = document.getElementById('vtuber');
+var clickCount = 0;
+
+// 更新分數顯示
+function updateScoreDisplay() {
+    document.getElementById('click-counter').textContent = clickCount;
+}
+
+// 按下時的事件
+vtuberImg.addEventListener('mousedown', function() {
+    this.src = 'img/num0/num0-open.png';
+    popSound.play();
+    clickCount++;
+    updateScoreDisplay();
+});
+
+// 放開時的事件
+vtuberImg.addEventListener('mouseup', function() {
+    this.src = 'img/num0/num0-open.png';
+    setTimeout(() => {
+        this.src = 'img/num0/num0-close.png';
+    }, 100); // 0.1秒後回到關閉狀態
+});
+
+// 滑鼠離開時確保回到關閉狀態
+vtuberImg.addEventListener('mouseleave', function() {
+    this.src = 'img/num0/num0-close.png';
+});
+</script>
+</body>
+</html>
