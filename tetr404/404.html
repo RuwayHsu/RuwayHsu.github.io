@@ -1,0 +1,1229 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 Tetris</title>
+    <style>
+        body {
+            background: linear-gradient(to bottom, #2a1a3d, #000000);
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            overflow-x: hidden;
+        }
+
+        .container {
+            text-align: center;
+            max-width: 1200px;
+            padding: 20px;
+            width: 100%;
+        }
+
+        h1, h2 {
+            color: #ff99cc;
+            margin: 10px 0;
+        }
+
+        h3 {
+            color: #ff99cc;
+            margin: 2px 0;
+        }
+
+        .game-layout {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: flex-start;
+            flex-wrap: nowrap;
+            gap: 20px;
+            width: 100%;
+        }
+
+        .game-left, .game-center, .game-right {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .game-left {
+            min-width: 220px;
+            max-width: 260px;
+            flex: 1;
+        }
+
+        .game-center {
+            flex: 2;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .game-right {
+            min-width: 220px;
+            max-width: 320px;
+            flex: 1;
+        }
+
+        #game-container {
+            position: relative;
+            width: 400px;
+            height: 800px;
+            background: rgba(26, 26, 46, 0.8);
+            border: 2px solid #ff69b4;
+            border-radius: 5px;
+            box-shadow: 0 0 15px rgba(255, 105, 180, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        #game-board {
+            width: 100%;
+            height: 100%;
+            display: grid;
+            grid-template-columns: repeat(10, 1fr);
+            grid-template-rows: repeat(20, 1fr);
+        }
+
+        .cell {
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .game-info {
+            display: flex;
+            justify-content: space-between;
+            width: 300px;
+            margin: 10px auto;
+        }
+
+        .info-block {
+            padding: 5px;
+            background: rgba(26, 26, 46, 0.8);
+            border: 1px solid #ff69b4;
+            border-radius: 5px;
+            text-align: center;
+            flex: 1;
+            margin: 0 5px;
+        }
+
+        .piece-preview-container {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            margin-bottom: 1px;
+            width: 70%;
+        }
+
+        .piece-preview-wrapper {
+            background: rgba(26, 26, 46, 0.8);
+            border: 1px solid #ff69b4;
+            border-radius: 5px;
+            padding: 10px;
+            width: 100%;
+        }
+
+        .piece-preview {
+            width: 100px;
+            height: 70px;
+            margin: 5px auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(4, 1fr);
+            padding: 5px;
+        }
+
+        .next-piece-mini {
+            width: 100px;
+            height: 100px;
+            margin: 5px auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(4, 1fr);
+            padding: 3px;
+        }
+
+        .controls {
+            margin: 15px auto;
+            background: rgba(26, 26, 46, 0.8);
+            border: 1px solid #ff69b4;
+            border-radius: 5px;
+            padding: 10px;
+            width: 100%;
+        }
+
+        .control-row {
+            display: flex;
+            justify-content: center;
+            margin: 5px 0;
+        }
+
+        .key {
+            background: #3a2a4d;
+            border: 1px solid #ff99cc;
+            color: #ff99cc;
+            padding: 5px;
+            margin: 0 5px;
+            border-radius: 5px;
+            min-width: 20px;
+            text-align: center;
+            font-weight: bold;
+            user-select: none;
+        }
+
+        .key:active, .key.active {
+            background: #ff69b4;
+            color: #ffffff;
+        }
+
+        .footer {
+            margin-top: 20px;
+            text-align: center;
+            color: #ffb8db;
+        }
+
+        #game-over, #game-paused {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            display: none;
+        }
+
+        .message {
+            font-size: 24px;
+            color: #ff99cc;
+            margin-bottom: 20px;
+        }
+
+        .button {
+            background: transparent;
+            border: 2px solid #ff69b4;
+            color: #ff69b4;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .button:hover {
+            background: #ff69b4;
+            color: #ffffff;
+        }
+
+        /* 磚塊顏色定義 */
+        .I-piece { background-color: #ff6f91; }
+        .O-piece { background-color: #ffc1d3; }
+        .T-piece { background-color: #ff99cc; }
+        .S-piece { background-color: #ff4d88; }
+        .Z-piece { background-color: #ff85a2; }
+        .J-piece { background-color: #ffb3c6; }
+        .L-piece { background-color: #ffccd9; }
+        
+        /* 磚塊陰影/邊框 */
+        .I-piece, .O-piece, .T-piece, .S-piece, .Z-piece, .J-piece, .L-piece {
+            box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.5);
+            border: 1px solid rgba(0, 0, 0, 0.3);
+        }
+
+        /* 螢光效果 */
+        .I-piece { box-shadow: 0 0 5px #ff6f91, inset 0 0 2px white; }
+        .O-piece { box-shadow: 0 0 5px #ffc1d3, inset 0 0 2px white; }
+        .T-piece { box-shadow: 0 0 5px #ff99cc, inset 0 0 2px white; }
+        .S-piece { box-shadow: 0 0 5px #ff4d88, inset 0 0 2px white; }
+        .Z-piece { box-shadow: 0 0 5px #ff85a2, inset 0 0 2px white; }
+        .J-piece { box-shadow: 0 0 5px #ffb3c6, inset 0 0 2px white; }
+        .L-piece { box-shadow: 0 0 5px #ffccd9, inset 0 0 2px white; }
+
+        .ghost-piece {
+            opacity: 0.3;
+            box-shadow: none;
+            border: 1px dashed white;
+        }
+
+        /* 消行動畫 */
+        @keyframes clear-line {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+            100% { transform: scale(0); opacity: 0; }
+        }
+
+        .clear-animation {
+            animation: clear-line 0.3s forwards;
+        }
+
+        /* 響應式設計 */
+        @media (max-width: 900px) {
+            .game-layout {
+                flex-direction: column;
+                align-items: center;
+            }
+            .game-left, .game-center, .game-right {
+                max-width: 100%;
+                min-width: unset;
+                width: 100%;
+            }
+        }
+
+        .mobile-blocker {
+            display: none;
+            background: rgba(26, 26, 46, 0.95);
+            border: 2px solid #ff69b4;
+            border-radius: 10px;
+            color: #ff99cc;
+            margin: 40px auto 20px auto;
+            padding: 40px 20px;
+            max-width: 400px;
+            box-shadow: 0 0 20px rgba(255, 105, 180, 0.2);
+        }
+        @media (max-width: 1000px) {
+            .game-layout, .footer {
+                display: none !important;
+            }
+            .mobile-blocker {
+                display: block;
+            }
+        }
+
+        @media (max-width: 600px) {
+            #game-container {
+                width: 250px;
+                height: 500px;
+            }
+            .game-info, .controls {
+                width: 250px;
+            }
+            
+            .piece-preview {
+                width: 90px;
+                height: 90px;
+            }
+            
+            .next-piece-mini {
+                width: 60px;
+                height: 60px;
+            }
+            
+            .key {
+                font-size: 12px;
+                padding: 5px;
+                min-width: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Tetr404</h1>
+        <p>原本是要做成404頁面的，算了吧w</p>
+        <div class="mobile-blocker">
+            <h2>螢幕寬度過小</h2>
+            <p>請使用桌機或將視窗放大至 1000px 以上以遊玩 Tetris。</p>
+        </div>
+        <div class="game-layout">
+            <div class="game-left">
+                <div class="game-info">
+                    <div class="info-block">
+                        <h3>分數</h3>
+                        <div id="score">0</div>
+                    </div>
+                    <div class="info-block">
+                        <h3>等級</h3>
+                        <div id="level">1</div>
+                    </div>
+                    <div class="info-block">
+                        <h3>消行</h3>
+                        <div id="lines">0</div>
+                    </div>
+                </div>
+                <div class="controls">
+                    <h3>遊玩說明</h3>
+                    <ul style="text-align: left; list-style-type: none; padding-left: 10px; margin: 5px 0;">
+                        <li><span class="key">A / ←</span>：向左移動方塊</li>
+                        <li><span class="key">D / →</span>：向右移動方塊</li>
+                        <li><span class="key">S / ↓</span>：加速下落</li>
+                        <li><span class="key">Z</span>：逆時針旋轉</li>
+                        <li><span class="key">X</span>：順時針旋轉</li>
+                        <li><span class="key">C</span>：保留方塊</li>
+                        <li><span class="key">空格</span>：瞬間下落</li>
+                        <li><span class="key">P</span>：暫停遊戲</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="game-center">
+                <div id="game-container">
+                    <div id="game-board"></div>
+                    <div id="game-over">
+                        <div class="message">遊戲結束</div>
+                        <button class="button" id="restart-btn">重新開始</button>
+                    </div>
+                    <div id="game-paused">
+                        <div class="message">遊戲暫停</div>
+                        <button class="button" id="resume-btn">繼續遊戲</button>
+                    </div>
+                </div>
+            </div>
+            <div class="game-right">
+                <div class="piece-preview-container">
+                    <div class="piece-preview-wrapper">
+                        <h3>Hold 方塊</h3>
+                        <div class="piece-preview" id="hold-piece"></div>
+                    </div>
+                    <div class="piece-preview-wrapper">
+                        <h3>下一個方塊</h3>
+                        <div class="piece-preview" id="next-piece"></div>
+                    </div>
+                    <div class="piece-preview-wrapper">
+                        <h3>未來方塊</h3>
+                        <div class="next-piece-mini" id="next-piece-2"></div>
+                        <div class="next-piece-mini" id="next-piece-3"></div>
+                        <div class="next-piece-mini" id="next-piece-4"></div>
+                        <div class="next-piece-mini" id="next-piece-5"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+        <div class="footer">
+            <p>© 2025 RuwayHsu滷滷熊熊 | 404 ERROR PAGE</p>
+        </div>
+    </div>
+
+    <script>
+    // Tetris遊戲核心邏輯
+    document.addEventListener('DOMContentLoaded', () => {
+        // 常數定義
+        const GRID_WIDTH = 10;
+        const GRID_HEIGHT = 20;
+        const COLORS = {
+            'I': '#00ffff', // Cyan
+            'O': '#ffff00', // Yellow
+            'T': '#800080', // Purple
+            'S': '#00ff00', // Green
+            'Z': '#ff0000', // Red
+            'J': '#0000ff', // Blue
+            'L': '#ff7f00'  // Orange
+        };
+
+        // Tetromino定義 - 使用SRS標準
+        const TETROMINOES = {
+            'I': {
+                shape: [
+                    [0, 0, 0, 0],
+                    [1, 1, 1, 1],
+                    [0, 0, 0, 0],
+                    [0, 0, 0, 0]
+                ],
+                className: 'I-piece',
+                kickTable: 'I'
+            },
+            'O': {
+                shape: [
+                    [1, 1],
+                    [1, 1]
+                ],
+                className: 'O-piece',
+                kickTable: 'O'
+            },
+            'T': {
+                shape: [
+                    [0, 1, 0],
+                    [1, 1, 1],
+                    [0, 0, 0]
+                ],
+                className: 'T-piece',
+                kickTable: 'JLSTZ'
+            },
+            'S': {
+                shape: [
+                    [0, 1, 1],
+                    [1, 1, 0],
+                    [0, 0, 0]
+                ],
+                className: 'S-piece',
+                kickTable: 'JLSTZ'
+            },
+            'Z': {
+                shape: [
+                    [1, 1, 0],
+                    [0, 1, 1],
+                    [0, 0, 0]
+                ],
+                className: 'Z-piece',
+                kickTable: 'JLSTZ'
+            },
+            'J': {
+                shape: [
+                    [1, 0, 0],
+                    [1, 1, 1],
+                    [0, 0, 0]
+                ],
+                className: 'J-piece',
+                kickTable: 'JLSTZ'
+            },
+            'L': {
+                shape: [
+                    [0, 0, 1],
+                    [1, 1, 1],
+                    [0, 0, 0]
+                ],
+                className: 'L-piece',
+                kickTable: 'JLSTZ'
+            }
+        };
+
+        // SRS踢牆定義
+        const WALL_KICKS = {
+            'JLSTZ': {
+                '0,1': [[0, 0], [-1, 0], [-1, -1], [0, 2], [-1, 2]],
+                '1,0': [[0, 0], [1, 0], [1, 1], [0, -2], [1, -2]],
+                '1,2': [[0, 0], [1, 0], [1, 1], [0, -2], [1, -2]],
+                '2,1': [[0, 0], [-1, 0], [-1, -1], [0, 2], [-1, 2]],
+                '2,3': [[0, 0], [1, 0], [1, -1], [0, 2], [1, 2]],
+                '3,2': [[0, 0], [-1, 0], [-1, 1], [0, -2], [-1, -2]],
+                '3,0': [[0, 0], [-1, 0], [-1, 1], [0, -2], [-1, -2]],
+                '0,3': [[0, 0], [1, 0], [1, -1], [0, 2], [1, 2]]
+            },
+            'I': {
+                '0,1': [[0, 0], [-2, 0], [1, 0], [-2, 1], [1, -2]],
+                '1,0': [[0, 0], [2, 0], [-1, 0], [2, -1], [-1, 2]],
+                '1,2': [[0, 0], [-1, 0], [2, 0], [-1, -2], [2, 1]],
+                '2,1': [[0, 0], [1, 0], [-2, 0], [1, 2], [-2, -1]],
+                '2,3': [[0, 0], [2, 0], [-1, 0], [2, -1], [-1, 2]],
+                '3,2': [[0, 0], [-2, 0], [1, 0], [-2, 1], [1, -2]],
+                '3,0': [[0, 0], [1, 0], [-2, 0], [1, 2], [-2, -1]],
+                '0,3': [[0, 0], [-1, 0], [2, 0], [-1, -2], [2, 1]]
+            },
+            'O': {
+                '0,1': [[0, 0]],
+                '1,0': [[0, 0]],
+                '1,2': [[0, 0]],
+                '2,1': [[0, 0]],
+                '2,3': [[0, 0]],
+                '3,2': [[0, 0]],
+                '3,0': [[0, 0]],
+                '0,3': [[0, 0]]
+            }
+        };
+
+        // 遊戲狀態變數
+        let grid = Array(GRID_HEIGHT).fill().map(() => Array(GRID_WIDTH).fill(0));
+        let gameBoard = document.getElementById('game-board');
+        let score = 0;
+        let level = 1;
+        let linesCleared = 0;
+        let gameRunning = false;
+        let gameOver = false;
+        let paused = false;
+        let currentPiece = null;
+        let ghostPiece = null;
+        let holdPiece = null;
+        let canHold = true;
+        let nextPieces = [];
+        let dropInterval = 1000;
+        let dropCounter = 0;
+        let lastTime = 0;
+        let animationFrameId = null;
+        let tSpinDetected = false;
+        let lastMoveWasRotation = false;
+        let comboCount = 0;
+        
+        // 初始化遊戲板
+        function initializeBoard() {
+            gameBoard.innerHTML = '';
+            for (let y = 0; y < GRID_HEIGHT; y++) {
+                for (let x = 0; x < GRID_WIDTH; x++) {
+                    const cell = document.createElement('div');
+                    cell.classList.add('cell');
+                    cell.dataset.x = x;
+                    cell.dataset.y = y;
+                    gameBoard.appendChild(cell);
+                }
+            }
+        }
+
+        // 遊戲初始化
+        function initGame() {
+            grid = Array(GRID_HEIGHT).fill().map(() => Array(GRID_WIDTH).fill(0));
+            gameOver = false;
+            paused = false;
+            score = 0;
+            level = 1;
+            linesCleared = 0;
+            dropInterval = 1000;
+            nextPieces = [];
+            holdPiece = null;
+            canHold = true;
+            lastMoveWasRotation = false;
+            comboCount = 0;
+            
+            initializeBoard();
+            updateScore();
+            
+            // 生成初始的7個方塊袋
+            generateBag();
+            spawnNewPiece();
+            
+            document.getElementById('game-over').style.display = 'none';
+            document.getElementById('game-paused').style.display = 'none';
+            
+            gameRunning = true;
+            if (animationFrameId) {
+                cancelAnimationFrame(animationFrameId);
+            }
+            lastTime = performance.now();
+            update(lastTime);
+        }
+
+        // 使用7-bag系統生成下一個方塊
+        function generateBag() {
+            if (nextPieces.length <= 7) {
+                const tetrominos = Object.keys(TETROMINOES);
+                const shuffledBag = shuffle([...tetrominos]);
+                nextPieces.push(...shuffledBag);
+            }
+        }
+
+        // Fisher-Yates洗牌算法
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // 繪製網格上的方塊
+        function drawBoard() {
+            const cells = document.querySelectorAll('.cell');
+            cells.forEach(cell => {
+                const x = parseInt(cell.dataset.x);
+                const y = parseInt(cell.dataset.y);
+                
+                // 清除之前的類別
+                cell.className = 'cell';
+                
+                if (grid[y][x]) {
+                    cell.classList.add(`${grid[y][x]}-piece`);
+                }
+            });
+        }
+
+        // 繪製當前方塊
+        function drawPiece(piece, isGhost = false) {
+            if (!piece) return;
+            
+            const shape = TETROMINOES[piece.type].shape;
+            const className = TETROMINOES[piece.type].className;
+            
+            for (let y = 0; y < shape.length; y++) {
+                for (let x = 0; x < shape[y].length; x++) {
+                    if (shape[y][x] && piece.y + y >= 0) {
+                        const cellX = piece.x + x;
+                        const cellY = piece.y + y;
+                        
+                        if (cellX >= 0 && cellX < GRID_WIDTH && cellY < GRID_HEIGHT) {
+                            const cell = document.querySelector(`.cell[data-x="${cellX}"][data-y="${cellY}"]`);
+                            if (cell) {
+                                cell.classList.add(className);
+                                if (isGhost) {
+                                    cell.classList.add('ghost-piece');
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // 更新幽靈方塊位置
+        function updateGhostPiece() {
+            if (!currentPiece) return;
+            
+            // 複製當前方塊
+            ghostPiece = {
+                ...currentPiece,
+                y: currentPiece.y
+            };
+            
+            // 將複製的方塊放置到最下方
+            while (isValidPosition(ghostPiece, 0, 1)) {
+                ghostPiece.y++;
+            }
+        }
+
+        // 生成新方塊
+        function spawnNewPiece() {
+            generateBag();
+            
+            const nextType = nextPieces.shift();
+            const shape = TETROMINOES[nextType].shape;
+            
+            // 計算初始位置，將方塊置於頂部中央
+            const xOffset = Math.floor((GRID_WIDTH - shape[0].length) / 2);
+            
+            currentPiece = {
+                type: nextType,
+                x: xOffset,
+                y: 0,
+                rotation: 0
+            };
+            
+            lastMoveWasRotation = false;
+            
+            // 判斷是否遊戲結束
+            if (!isValidPosition(currentPiece, 0, 0)) {
+                gameOver = true;
+                gameRunning = false;
+                document.getElementById('game-over').style.display = 'flex';
+                return;
+            }
+            
+            updateGhostPiece();
+            updateNextPieces();
+        }
+
+        // 檢查位置是否有效
+        function isValidPosition(piece, xOffset, yOffset) {
+            if (!piece) return false;
+            
+            const shape = TETROMINOES[piece.type].shape;
+            
+            for (let y = 0; y < shape.length; y++) {
+                for (let x = 0; x < shape[y].length; x++) {
+                    if (shape[y][x]) {
+                        const newX = piece.x + x + xOffset;
+                        const newY = piece.y + y + yOffset;
+                        
+                        // 檢查是否超出邊界或與其他方塊碰撞
+                        if (
+                            newX < 0 || 
+                            newX >= GRID_WIDTH || 
+                            newY >= GRID_HEIGHT || 
+                            (newY >= 0 && grid[newY][newX])
+                        ) {
+                            return false;
+                        }
+                    }
+                }
+            }
+            
+            return true;
+        }
+
+        // 鎖定方塊到網格中
+        function lockPiece() {
+            if (!currentPiece) return;
+            
+            const shape = TETROMINOES[currentPiece.type].shape;
+            
+            for (let y = 0; y < shape.length; y++) {
+                for (let x = 0; x < shape[y].length; x++) {
+                    if (shape[y][x]) {
+                        const gridY = currentPiece.y + y;
+                        const gridX = currentPiece.x + x;
+                        
+                        if (gridY >= 0) {
+                            grid[gridY][gridX] = currentPiece.type;
+                        }
+                    }
+                }
+            }
+            
+            // 檢查T-Spin
+            checkTSpin();
+            
+            // 檢查並清除已完成的行
+            clearLines();
+            
+            // 重置
+            canHold = true;
+            spawnNewPiece();
+        }
+
+        // 檢測T-Spin
+        function checkTSpin() {
+            if (currentPiece.type === 'T' && lastMoveWasRotation) {
+                const cornerCount = countFilledCorners();
+                if (cornerCount >= 3) {
+                    tSpinDetected = true;
+                    // 可以在這裡加入T-Spin的加分邏輯
+                }
+            }
+        }
+
+        // 計算T方塊周圍四個角被占用的數量
+        function countFilledCorners() {
+            const corners = [
+                [currentPiece.x, currentPiece.y],
+                [currentPiece.x + 2, currentPiece.y],
+                [currentPiece.x, currentPiece.y + 2],
+                [currentPiece.x + 2, currentPiece.y + 2]
+            ];
+            
+            let count = 0;
+            for (const [x, y] of corners) {
+                if (x < 0 || x >= GRID_WIDTH || y < 0 || y >= GRID_HEIGHT || grid[y][x]) {
+                    count++;
+                }
+            }
+            
+            return count;
+        }
+
+        // 旋轉方塊
+        function rotatePiece(direction) {
+            if (!currentPiece || currentPiece.type === 'O') return; // O方塊不需要旋轉
+            
+            const prevRotation = currentPiece.rotation;
+            const newRotation = (prevRotation + (direction === 'clockwise' ? 1 : 3)) % 4;
+            
+            // 保存旋轉前的形狀
+            const originalShape = TETROMINOES[currentPiece.type].shape;
+            
+            // 旋轉矩陣
+            const rotatedShape = rotateMatrix(originalShape, direction === 'clockwise');
+            TETROMINOES[currentPiece.type].shape = rotatedShape;
+            
+            // 應用SRS踢牆
+            const kickTable = TETROMINOES[currentPiece.type].kickTable;
+            const kicks = WALL_KICKS[kickTable][`${prevRotation},${newRotation}`];
+            
+            let kickApplied = false;
+            for (const [kickX, kickY] of kicks) {
+                if (isValidPosition(currentPiece, kickX, kickY)) {
+                    currentPiece.x += kickX;
+                    currentPiece.y += kickY;
+                    currentPiece.rotation = newRotation;
+                    kickApplied = true;
+                    lastMoveWasRotation = true;
+                    break;
+                }
+            }
+            
+            // 如果無法旋轉，恢復原來的形狀
+            if (!kickApplied) {
+                TETROMINOES[currentPiece.type].shape = originalShape;
+            } else {
+                // 更新幽靈方塊
+                updateGhostPiece();
+            }
+        }
+
+        // 旋轉矩陣
+        function rotateMatrix(matrix, clockwise) {
+            const size = matrix.length;
+            const rotated = Array(size).fill().map(() => Array(size).fill(0));
+            
+            for (let y = 0; y < size; y++) {
+                for (let x = 0; x < size; x++) {
+                    if (clockwise) {
+                        rotated[x][size - 1 - y] = matrix[y][x];
+                    } else {
+                        rotated[size - 1 - x][y] = matrix[y][x];
+                    }
+                }
+            }
+            
+            return rotated;
+        }
+
+        // 移動方塊
+        function movePiece(xOffset, yOffset) {
+            if (!currentPiece || gameOver || paused) return;
+            
+            if (isValidPosition(currentPiece, xOffset, yOffset)) {
+                currentPiece.x += xOffset;
+                currentPiece.y += yOffset;
+                
+                if (yOffset > 0) {
+                    dropCounter = 0;
+                    lastMoveWasRotation = false;
+                }
+                
+                if (xOffset !== 0) {
+                    lastMoveWasRotation = false;
+                }
+                
+                updateGhostPiece();
+                return true;
+            }
+            
+            // 如果是向下移動且不能移動，則鎖定方塊
+            if (yOffset > 0) {
+                lockPiece();
+            }
+            
+            return false;
+        }
+
+        // 硬降
+        function hardDrop() {
+            if (!currentPiece || gameOver || paused) return;
+            
+            let dropDistance = 0;
+            while (isValidPosition(currentPiece, 0, 1)) {
+                currentPiece.y++;
+                dropDistance++;
+            }
+            
+            // 加分：2分/單位下落
+            score += dropDistance * 2;
+            updateScore();
+            
+            lockPiece();
+        }
+
+        // 暫存方塊
+        function holdCurrentPiece() {
+            if (!canHold || gameOver || paused) return;
+            
+            const currentType = currentPiece.type;
+            
+            if (holdPiece === null) {
+                holdPiece = currentType;
+                spawnNewPiece();
+            } else {
+                const tempType = holdPiece;
+                holdPiece = currentType;
+                
+                const shape = TETROMINOES[tempType].shape;
+                const xOffset = Math.floor((GRID_WIDTH - shape[0].length) / 2);
+                
+                currentPiece = {
+                    type: tempType,
+                    x: xOffset,
+                    y: 0,
+                    rotation: 0
+                };
+                
+                // 檢查是否可以放置，如果不能則遊戲結束
+                if (!isValidPosition(currentPiece, 0, 0)) {
+                    gameOver = true;
+                    gameRunning = false;
+                    document.getElementById('game-over').style.display = 'flex';
+                    return;
+                }
+            }
+            
+            updateGhostPiece();
+            updateHoldPiece();
+            canHold = false;
+            lastMoveWasRotation = false;
+        }
+
+        // 清除完成的行
+        function clearLines() {
+            let clearedCount = 0;
+            let tSpin = tSpinDetected;
+            
+            for (let y = GRID_HEIGHT - 1; y >= 0; y--) {
+                // 檢查是否每個格子都有方塊
+                if (grid[y].every(cell => cell !== 0)) {
+                    // 動畫效果（可選）
+                    for (let x = 0; x < GRID_WIDTH; x++) {
+                        const cell = document.querySelector(`.cell[data-x="${x}"][data-y="${y}"]`);
+                        if (cell) {
+                            cell.classList.add('clear-animation');
+                        }
+                    }
+                    
+                    // 移除該行並在頂部添加新行
+                    grid.splice(y, 1);
+                    grid.unshift(Array(GRID_WIDTH).fill(0));
+                    
+                    clearedCount++;
+                    y++; // 重新檢查當前行，因為它現在包含新的內容
+                }
+            }
+            
+            if (clearedCount > 0) {
+                // 增加連擊數
+                comboCount++;
+                
+                // 計算分數
+                let linePoints = [0, 100, 300, 500, 800][clearedCount] * level;
+                
+                // T-Spin加分
+                if (tSpin) {
+                    if (clearedCount === 1) {
+                        linePoints = 800 * level; // T-Spin Single
+                    } else if (clearedCount === 2) {
+                        linePoints = 1200 * level; // T-Spin Double
+                    } else if (clearedCount === 3) {
+                        linePoints = 1600 * level; // T-Spin Triple
+                    }
+                }
+                
+                // 連擊獎勵
+                if (comboCount > 1) {
+                    linePoints += (50 * comboCount * level);
+                }
+                
+                score += linePoints;
+                linesCleared += clearedCount;
+                
+                // 升級
+                level = Math.floor(linesCleared / 10) + 1;
+                dropInterval = Math.max(100, 1000 - (level - 1) * 100); // 最快100ms/格
+                
+                updateScore();
+            } else {
+                comboCount = 0;
+            }
+            
+            tSpinDetected = false;
+        }
+
+        // 更新分數顯示
+        function updateScore() {
+            document.getElementById('score').textContent = score;
+            document.getElementById('level').textContent = level;
+            document.getElementById('lines').textContent = linesCleared;
+        }
+
+        // 更新暫存方塊顯示
+        function updateHoldPiece() {
+            const holdPieceElement = document.getElementById('hold-piece');
+            holdPieceElement.innerHTML = '';
+            
+            if (holdPiece) {
+                const shape = TETROMINOES[holdPiece].shape;
+                const className = TETROMINOES[holdPiece].className;
+                
+                // 創建預覽網格
+                const previewGrid = document.createElement('div');
+                previewGrid.style.display = 'grid';
+                
+                // 計算正確的網格大小和單元格尺寸
+                const cellSize = Math.min(
+                    holdPieceElement.clientWidth / 4,
+                    holdPieceElement.clientHeight / 4
+                );
+                
+                // 居中顯示
+                previewGrid.style.margin = 'auto';
+                previewGrid.style.width = `${cellSize * 4}px`;
+                previewGrid.style.height = `${cellSize * 4}px`;
+                
+                // 使用固定像素尺寸，而不是 1fr
+                previewGrid.style.gridTemplateColumns = `repeat(4, ${cellSize}px)`;
+                previewGrid.style.gridTemplateRows = `repeat(4, ${cellSize}px)`;
+                
+                // 計算方塊應該居中的偏移量
+                const offsetX = Math.floor((4 - shape[0].length) / 2);
+                const offsetY = Math.floor((4 - shape.length) / 2);
+                
+                // 創建 4x4 網格以確保一致的大小
+                for (let y = 0; y < 4; y++) {
+                    for (let x = 0; x < 4; x++) {
+                        const cell = document.createElement('div');
+                        
+                        // 檢查是否在方塊形狀範圍內
+                        if (y >= offsetY && y < offsetY + shape.length && 
+                            x >= offsetX && x < offsetX + shape[0].length && 
+                            shape[y - offsetY][x - offsetX]) {
+                            cell.classList.add(className);
+                        }
+                        
+                        // 所有單元格大小一致
+                        cell.style.width = `${cellSize}px`;
+                        cell.style.height = `${cellSize}px`;
+                        
+                        previewGrid.appendChild(cell);
+                    }
+                }
+                
+                holdPieceElement.appendChild(previewGrid);
+            }
+        }
+
+        // 更新下一個方塊顯示
+        function updateNextPieces() {
+            // 主要的下一個方塊
+            updateNextPiece('next-piece', 0);
+            
+            // 後續的預覽方塊
+            for (let i = 1; i <= 4; i++) {
+                updateNextPiece(`next-piece-${i+1}`, i);
+            }
+        }
+
+        // 更新單個預覽方塊
+        function updateNextPiece(elementId, index) {
+            const nextPieceElement = document.getElementById(elementId);
+            nextPieceElement.innerHTML = '';
+            
+            if (index < nextPieces.length) {
+                const nextType = nextPieces[index];
+                const shape = TETROMINOES[nextType].shape;
+                const className = TETROMINOES[nextType].className;
+                
+                // 創建預覽網格
+                const previewGrid = document.createElement('div');
+                previewGrid.style.display = 'grid';
+                
+                // 計算正確的網格大小和單元格尺寸
+                const cellSize = Math.min(
+                    nextPieceElement.clientWidth / Math.max(4, shape[0].length),
+                    nextPieceElement.clientHeight / Math.max(4, shape.length)
+                );
+                
+                // 居中顯示
+                previewGrid.style.margin = 'auto';
+                previewGrid.style.width = `${cellSize * Math.max(4, shape[0].length)}px`;
+                previewGrid.style.height = `${cellSize * Math.max(4, shape.length)}px`;
+                
+                // 使用固定像素尺寸，而不是 1fr
+                previewGrid.style.gridTemplateColumns = `repeat(${Math.max(4, shape[0].length)}, ${cellSize}px)`;
+                previewGrid.style.gridTemplateRows = `repeat(${Math.max(4, shape.length)}, ${cellSize}px)`;
+                
+                // 計算方塊應該居中的偏移量
+                const offsetX = Math.floor((4 - shape[0].length) / 2);
+                const offsetY = Math.floor((4 - shape.length) / 2);
+                
+                // 創建 4x4 網格以確保一致的大小
+                for (let y = 0; y < Math.max(4, shape.length); y++) {
+                    for (let x = 0; x < Math.max(4, shape[0].length); x++) {
+                        const cell = document.createElement('div');
+                        
+                        // 檢查是否在方塊形狀範圍內
+                        if (y >= offsetY && y < offsetY + shape.length && 
+                            x >= offsetX && x < offsetX + shape[0].length && 
+                            shape[y - offsetY][x - offsetX]) {
+                            cell.classList.add(className);
+                        }
+                        
+                        // 所有單元格大小一致
+                        cell.style.width = `${cellSize}px`;
+                        cell.style.height = `${cellSize}px`;
+                        
+                        previewGrid.appendChild(cell);
+                    }
+                }
+                
+                nextPieceElement.appendChild(previewGrid);
+            }
+        }
+
+        // 遊戲主循環
+        function update(time) {
+            if (!gameRunning) return;
+            
+            const deltaTime = time - lastTime;
+            lastTime = time;
+            
+            if (!paused) {
+                // 增加下落計數器
+                dropCounter += deltaTime;
+                
+                // 時間到，方塊下落
+                if (dropCounter > dropInterval) {
+                    movePiece(0, 1);
+                    dropCounter = 0;
+                }
+                
+                // 繪製遊戲
+                drawBoard();
+                drawPiece(ghostPiece, true);
+                drawPiece(currentPiece);
+            }
+            
+            animationFrameId = requestAnimationFrame(update);
+        }
+
+        // 按鍵控制
+        function handleKeyDown(event) {
+            if (gameOver) {
+                if (event.key === 'r' || event.key === 'R') {
+                    initGame();
+                }
+                return;
+            }
+            
+            if (event.key === 'p' || event.key === 'P') {
+                paused = !paused;
+                document.getElementById('game-paused').style.display = paused ? 'flex' : 'none';
+                return;
+            }
+            
+            if (paused) return;
+            
+            switch (event.key) {
+                case 'ArrowLeft':
+                case 'a':
+                case 'A':
+                    movePiece(-1, 0);
+                    break;
+                case 'ArrowRight':
+                case 'd':
+                case 'D':
+                    movePiece(1, 0);
+                    break;
+                case 'ArrowDown':
+                case 's':
+                case 'S':
+                    if (movePiece(0, 1)) {
+                        score += 1;
+                        updateScore();
+                    }
+                    break;
+                case 'z':
+                case 'Z':
+                    rotatePiece('counterclockwise');
+                    break;
+                case 'x':
+                case 'X':
+                    rotatePiece('clockwise');
+                    break;
+                case 'c':
+                case 'C':
+                    holdCurrentPiece();
+                    break;
+                case ' ':
+                    hardDrop();
+                    break;
+            }
+            
+            // 防止方向鍵滾動頁面
+            if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', ' '].includes(event.key)) {
+                event.preventDefault();
+            }
+        }
+
+        // 初始設定
+        function setup() {
+            // 添加按鍵事件監聽器
+            document.addEventListener('keydown', handleKeyDown);
+            
+            // 設定按鈕監聽器
+            document.getElementById('restart-btn').addEventListener('click', initGame);
+            document.getElementById('resume-btn').addEventListener('click', () => {
+                paused = false;
+                document.getElementById('game-paused').style.display = 'none';
+            });
+            
+            // 初始化遊戲
+            initGame();
+        }
+
+        // 啟動遊戲
+        setup();
+    });
+    </script>
+</body>
+</html>
