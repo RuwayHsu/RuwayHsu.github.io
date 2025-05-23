@@ -656,9 +656,16 @@
                         if (cellX >= 0 && cellX < GRID_WIDTH && cellY < GRID_HEIGHT) {
                             const cell = document.querySelector(`.cell[data-x="${cellX}"][data-y="${cellY}"]`);
                             if (cell) {
-                                cell.classList.add(className);
                                 if (isGhost) {
-                                    cell.classList.add('ghost-piece');
+                                    // 只有當 cell 沒有其他方塊 class 時才加幽靈方塊
+                                    if (cell.className === 'cell') {
+                                        cell.classList.add(className);
+                                        cell.classList.add('ghost-piece');
+                                    }
+                                } else {
+                                    // 畫實體方塊時，先移除幽靈方塊 class，確保不被覆蓋
+                                    cell.classList.remove('ghost-piece');
+                                    cell.classList.add(className);
                                 }
                             }
                         }
