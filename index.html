@@ -569,7 +569,6 @@
         <div class="nav-menu">
             <a href="#home-section">首頁</a>
             <a href="#commission">委託資訊</a>
-            <a href="#schedule">我的周表</a>
             <a href="#twitch">Twitch指令說明</a>
             <a href="#skills">所學技能</a>
             <a href="#partners">協作夥伴與贊助者</a>
@@ -644,22 +643,6 @@
                     <li>(簡單來說有5行程式，但其中一行是呼叫7行的函式，那我會算為4+7=11行，估算為10行)</li>
                     <li>根據功能困難度定價1單位，分為1000、1500、2000，困難度可以進行討論而定義</li>
                 </ul>
-            </div>
-
-            <div id="schedule" class="section">
-                <h2>我的周表</h2>
-                <h3>這真的會實時更新!!!</h3>
-                <table class="custom-table">
-                    <thead>
-                        <tr>
-                            <th>日期</th>
-                            <th>計畫</th>
-                        </tr>
-                    </thead>
-                    <tbody id="scheduleTableBody">
-                        <!-- 填充吧寶貝 -->
-                    </tbody>
-                </table>
             </div>
 
             <div id="twitch" class="section">
@@ -1090,29 +1073,6 @@
                     }
                 });
             });
-
-            fetch('https://api.sheetbest.com/sheets/c4ef187f-1820-4f5b-8a66-947e86c029d9')
-                .then(response => response.json())
-                .then(data => {
-                    const tbody = document.getElementById('scheduleTableBody');
-                    tbody.innerHTML = '';
-                    data.forEach(item => {
-                        const row = `
-                            <tr>
-                                <td>${item.日期}</td>
-                                <td>${item.計畫}</td>
-                            </tr>`;
-                        tbody.innerHTML += row;
-                    });
-                })
-                .catch(error => {
-                    console.error('抓取資料失敗:', error);
-                    const tbody = document.getElementById('scheduleTableBody');
-                    tbody.innerHTML = `
-                        <tr>
-                            <td colspan="2">無法載入資料，請稍後再試</td>
-                        </tr>`;
-                });
         });
     </script>
 </body>
